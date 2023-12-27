@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="9.6373777mm"
-   height="11.218502mm"
-   viewBox="0 0 9.6373777 11.218502"
+   width="7.6419678mm"
+   height="8.8957214mm"
+   viewBox="0 0 7.6419677 8.8957214"
    version="1.1"
    id="svg13248"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.4187009"
-     inkscape:cx="493.19216"
-     inkscape:cy="170.76629"
+     inkscape:zoom="6.6992144"
+     inkscape:cx="-3.0600603"
+     inkscape:cy="23.360948"
      inkscape:window-width="1366"
      inkscape:window-height="704"
      inkscape:window-x="0"
@@ -38,10 +38,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(25.096198,-103.2674)">
+     transform="translate(24.098493,-104.42879)">
     <g
        id="g13188"
-       transform="matrix(0.07166567,0,0,0.07166567,-23.405715,103.2674)"
+       transform="matrix(0.05682736,0,0,0.05682736,-22.758023,104.42879)"
        style="fill:#0078d6">
       <path
          d="M -7.5389611,14.647197 34.326925,8.9008991 V 49.359528 H -7.5389611 M 39.369594,8.1034537 94.838961,6.8372518e-7 V 49.019441 H 39.369594 M -7.5389611,53.639934 H 34.326925 v 40.5759 L -7.5389611,88.352265 M 39.369594,54.179382 H 94.838961 V 102.72974 L 39.369594,94.872554"
