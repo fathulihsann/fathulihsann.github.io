@@ -17,16 +17,16 @@
     --ease:cubic-bezier(.22,.61,.36,1);
   }
   [data-theme="dark"]{
-    --bg:#020203;--bg-deep:#000000;--surface:#0d1a2b;--surface-2:#122439;
+    --bg:#020203;--bg-deep:#000000;--surface:#111113;--surface-2:#1a1a1d;
     --nav-bg:#131315;--nav-bg-2:#1c1c1f;
     --ink:#e9eef7;--muted:#7d90aa;--border:rgba(255,255,255,.09);--grid:rgba(255,255,255,.035);
-    --panel-accent:#1E3E62;
+    --panel-accent:#111113;
   }
   [data-theme="light"]{
     --bg:#f5f7fa;--bg-deep:#eaeef3;--surface:#ffffff;--surface-2:#f0f3f7;
     --nav-bg:#ffffff;--nav-bg-2:#eef0f3;
     --ink:#0B192C;--muted:#5a6b82;--border:rgba(11,25,44,.12);--grid:rgba(11,25,44,.04);
-    --panel-accent:#e4ecf5;
+    --panel-accent:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -77,16 +77,19 @@
   .sec-cmd{margin-bottom:34px}
   .sec-cmd h2{font-size:clamp(26px,5vw,42px);margin-top:10px}
 
-  /* ===== hero ===== */
+  /* ===== hero (Andreas-style: left-aligned narrative headline) ===== */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:60px}
-  .hero-inner{width:100%}
-  .hero .prompt{font-size:15px;margin-bottom:18px}
-  .hero h1{font-size:clamp(40px,8vw,88px);margin-bottom:10px}
+  .hero-inner{width:100%;text-align:left}
+  .hero .prompt{font-size:15px;margin-bottom:22px}
+  .hero .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .hero .kicker b{color:var(--ink);font-weight:600}
+  .hero h1{font-size:clamp(36px,6.4vw,86px);max-width:15ch;font-weight:700;letter-spacing:-.03em;line-height:.98}
   .hero h1 .accent{color:var(--accent)}
-  .hero .roles{font-family:var(--mono);font-size:clamp(16px,3vw,24px);color:var(--muted);margin:18px 0 26px}
+  .hero h1 .cursor{width:.5ch;height:.85em;vertical-align:-.1em}
+  .hero .roles{font-family:var(--mono);font-size:clamp(14px,2vw,16px);color:var(--muted);margin:22px 0 0}
   .hero .roles span{color:var(--ink)}
   .hero .roles .sep{color:var(--accent);margin:0 10px}
-  .hero .tagline{color:var(--muted);max-width:540px;font-size:17px}
+  .hero .tagline{color:var(--muted);max-width:540px;font-size:17px;margin-top:18px}
   .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
   .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:9px;cursor:pointer;border:1px solid var(--border);transition:.25s;display:inline-block}
   .btn.primary{background:var(--accent);color:#0B192C;border-color:var(--accent);font-weight:600}
@@ -108,7 +111,7 @@
   /* ===== status stats ===== */
   .status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   @media(max-width:720px){.status-grid{grid-template-columns:1fr}}
-  .stat{background:linear-gradient(160deg,var(--panel-accent) 0%,var(--surface) 55%);border:1px solid var(--border);border-radius:12px;padding:24px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
   .stat .lbl{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
   .stat .lbl::before{content:"●";color:var(--green);font-size:9px}
   .stat .num{font-family:var(--sans);font-size:clamp(36px,6vw,54px);font-weight:700;color:var(--accent);margin-top:10px}
@@ -116,7 +119,7 @@
   /* ===== 3 pillars ===== */
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   @media(max-width:820px){.pillars{grid-template-columns:1fr}}
-  .pillar{background:linear-gradient(160deg,var(--panel-accent) 0%,var(--surface) 60%);border:1px solid var(--border);border-radius:14px;padding:30px;transition:.3s;position:relative;overflow:hidden}
+  .pillar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:30px;transition:.3s;position:relative;overflow:hidden}
   .pillar:hover{border-color:var(--accent);transform:translateY(-4px)}
   .pillar:hover .ic{color:var(--accent)}
   .pillar .ic{width:52px;height:52px;color:var(--muted);transition:color .3s;margin-bottom:18px}
@@ -217,11 +220,11 @@
   <!-- HERO -->
   <header class="hero"><div class="wrap hero-inner">
     <div class="prompt">whoami</div>
-    <h1><span id="typed"></span><span class="cursor">&nbsp;</span></h1>
+    <div class="kicker"><b>Fathul Ihsan</b> — Network &amp; Infrastructure Engineer</div>
+    <h1 id="heroHead">Merancang sistem yang tetap <span class="accent">jalan sendiri</span>, bukan yang terus-menerus <span class="accent">butuh diawasi.</span><span class="cursor">&nbsp;</span></h1>
     <div class="roles">
       <span>Network</span><span class="sep">·</span><span>Server</span><span class="sep">·</span><span>AI</span>
     </div>
-    <p class="tagline">Network & Infrastructure Engineer yang merancang sistem agar tetap berjalan tanpa perlu terus diawasi — mulai dari topology jaringan, provisioning server, hingga automasi berbasis AI agent.</p>
     <div class="hero-cta">
       <button class="btn primary" onclick="document.getElementById('work').scrollIntoView()">./view_work.sh</button>
       <button class="btn ghost" onclick="document.getElementById('contact').scrollIntoView()">./contact.sh</button>
@@ -392,9 +395,25 @@
   function toggleTheme(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');}
   setTheme(localStorage.getItem('theme')|| (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
 
-  // typewriter hero
-  const name="Fathul Ihsan", el=document.getElementById('typed');
-  let i=0;(function type(){if(i<=name.length){el.textContent=name.slice(0,i++);setTimeout(type,90);}})();
+  // hero headline: word-by-word fade reveal (accent spans preserved)
+  const heroHead=document.getElementById('heroHead');
+  (function splitWords(el){
+    [...el.childNodes].forEach(c=>{
+      if(c.nodeType===3){
+        const frag=document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(t=>{
+          if(t.trim()){const s=document.createElement('span');s.className='hw';s.textContent=t;frag.appendChild(s);}
+          else frag.appendChild(document.createTextNode(t));
+        });
+        c.replaceWith(frag);
+      } else if(c.nodeType===1 && !c.classList.contains('cursor')){
+        c.classList.add('hw');
+      }
+    });
+  })(heroHead);
+  const words=[...heroHead.querySelectorAll('.hw')];
+  words.forEach(w=>{w.style.opacity='0';w.style.transform='translateY(.25em)';w.style.display='inline-block';w.style.transition='opacity .5s var(--ease),transform .5s var(--ease)';});
+  words.forEach((w,i)=>setTimeout(()=>{w.style.opacity='1';w.style.transform='none';},220+i*55));
 
   // capsule nav: size the border-tracer rects to match the pill, animate dash offset with scroll
   const capBg=document.getElementById('capRectBg'), capTrace=document.getElementById('capRectTrace'),
