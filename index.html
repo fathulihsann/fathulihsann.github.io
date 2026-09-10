@@ -106,6 +106,43 @@
   .pillar h3{font-size:23px;margin:8px 0 12px}
   .pillar p{color:var(--muted);font-size:15px}
 
+  /* ===== feature block: network topology + server monitor ===== */
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:24px}
+  @media(max-width:860px){.feature{grid-template-columns:1fr}}
+  .feature.rev{direction:rtl}.feature.rev>*{direction:ltr}
+  .feat-text{align-self:center}
+  .feat-text .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .feat-text h3{font-size:clamp(22px,4vw,32px);margin:10px 0 14px}
+  .feat-text p{color:var(--muted);font-size:15px;max-width:46ch;margin-bottom:16px}
+  .feat-text ul{list-style:none;font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .feat-text li{padding:4px 0}
+  .feat-text li::before{content:"› ";color:var(--accent)}
+
+  /* network topology viz */
+  .netviz{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;min-height:300px}
+  .netviz svg{width:100%;height:auto;display:block}
+  .netviz .node circle{fill:var(--surface-2);stroke:var(--border);stroke-width:1.5}
+  .netviz .node.core circle{stroke:var(--accent);stroke-width:2}
+  .netviz .node text{font-family:var(--mono);font-size:6px;fill:var(--muted)}
+  .netviz .link{stroke:var(--border);stroke-width:1.5;fill:none}
+  .netviz .pkt{fill:var(--accent)}
+  .netviz .iflabel{font-family:var(--mono);font-size:4.5px;fill:var(--muted)}
+  @keyframes dash{to{stroke-dashoffset:-14}}
+  .netviz .active{stroke:var(--accent);stroke-dasharray:3 4;animation:dash .6s linear infinite}
+
+  /* server monitor */
+  .srvmon .panel-body{font-family:var(--mono)}
+  .meter{margin-bottom:16px}
+  .meter .top{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
+  .meter .top b{color:var(--ink)}
+  .bar{height:8px;border-radius:5px;background:var(--surface-2);overflow:hidden}
+  .bar span{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 1.4s var(--ease)}
+  .bar.ok span{background:linear-gradient(90deg,var(--green),#7ee6a0)}
+  .srvlog{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.9;min-height:96px}
+  .srvlog .ln{opacity:0;transform:translateY(4px);transition:.4s}
+  .srvlog .ln.in{opacity:1;transform:none}
+  .srvlog .g{color:var(--green)}.srvlog .a{color:var(--accent)}
+
   /* ===== work list ===== */
   .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
     padding:22px 4px;border-bottom:1px solid var(--border);transition:.25s;cursor:pointer}
@@ -189,7 +226,7 @@
     </div>
   </div></section>
 
-  <!-- 3 PILLARS -->
+  <!-- 3 PILLARS + rich network/server features -->
   <section id="pillars"><div class="wrap">
     <div class="sec-cmd reveal"><div class="prompt">ls -l ~/stack</div><h2>Tiga bidang yang ane geluti.</h2></div>
     <div class="pillars">
@@ -207,6 +244,76 @@
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="5"/><circle cx="10" cy="12" r="3"/><circle cx="38" cy="12" r="3"/><circle cx="10" cy="36" r="3"/><circle cx="38" cy="36" r="3"/><path d="M20 21l-8-6M28 21l8-6M20 27l-8 6M28 27l8 6"/></svg>
         <div class="tag">[03] ai</div><h3>AI Enthusiast</h3>
         <p>Placeholder — AI agents, automasi berbasis LLM, integrasi model ke workflow sehari-hari.</p>
+      </div>
+    </div>
+
+    <!-- NETWORK feature: live topology -->
+    <div class="feature reveal">
+      <div class="feat-text">
+        <div class="tag">// network.topology</div>
+        <h3>Merancang jaringan yang tetap nyambung.</h3>
+        <p>Placeholder — dari core switch sampai edge AP, ane desain topology yang redundant, minim bottleneck, dan gampang di-troubleshoot. Paket data di samping ini gambaran trafik yang mengalir antar node.</p>
+        <ul>
+          <li>Routing &amp; switching (Cisco / MikroTik)</li>
+          <li>WiFi multi-AP + roaming 802.11k/v/r</li>
+          <li>VLAN, RF planning, coverage heatmap</li>
+        </ul>
+      </div>
+      <div class="netviz" aria-hidden="true">
+        <svg viewBox="0 0 220 200" id="netsvg">
+          <!-- links -->
+          <path class="link" id="l1" d="M110 40 L50 100"/>
+          <path class="link" id="l2" d="M110 40 L170 100"/>
+          <path class="link" id="l3" d="M50 100 L30 160"/>
+          <path class="link" id="l4" d="M50 100 L80 160"/>
+          <path class="link" id="l5" d="M170 100 L140 160"/>
+          <path class="link" id="l6" d="M170 100 L190 160"/>
+          <!-- interface labels -->
+          <text class="iflabel" x="72" y="72">gi0/1</text>
+          <text class="iflabel" x="140" y="72">gi0/2</text>
+          <!-- nodes -->
+          <g class="node core"><circle cx="110" cy="40" r="15"/><text x="110" y="42" text-anchor="middle">CORE</text></g>
+          <g class="node"><circle cx="50" cy="100" r="12"/><text x="50" y="102" text-anchor="middle">SW1</text></g>
+          <g class="node"><circle cx="170" cy="100" r="12"/><text x="170" y="102" text-anchor="middle">SW2</text></g>
+          <g class="node"><circle cx="30" cy="160" r="9"/><text x="30" y="162" text-anchor="middle">AP</text></g>
+          <g class="node"><circle cx="80" cy="160" r="9"/><text x="80" y="162" text-anchor="middle">AP</text></g>
+          <g class="node"><circle cx="140" cy="160" r="9"/><text x="140" y="162" text-anchor="middle">SRV</text></g>
+          <g class="node"><circle cx="190" cy="160" r="9"/><text x="190" y="162" text-anchor="middle">SRV</text></g>
+          <!-- moving packet -->
+          <circle class="pkt" r="2.6"><animateMotion dur="2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1"><mpath href="#l1"/></animateMotion></circle>
+          <circle class="pkt" r="2.6"><animateMotion dur="2.4s" begin="0.5s" repeatCount="indefinite"><mpath href="#l2"/></animateMotion></circle>
+          <circle class="pkt" r="2.2"><animateMotion dur="1.8s" begin="0.3s" repeatCount="indefinite"><mpath href="#l5"/></animateMotion></circle>
+          <circle class="pkt" r="2.2"><animateMotion dur="2.1s" begin="0.9s" repeatCount="indefinite"><mpath href="#l4"/></animateMotion></circle>
+        </svg>
+      </div>
+    </div>
+
+    <!-- SERVER feature: live monitor -->
+    <div class="feature rev reveal">
+      <div class="feat-text">
+        <div class="tag">// server.monitor</div>
+        <h3>Menjaga server tetap sehat &amp; hidup.</h3>
+        <p>Placeholder — provisioning, monitoring, dan automasi biar downtime minim. Panel di samping meniru dashboard resource + log service yang ane pantau tiap hari.</p>
+        <ul>
+          <li>Linux server hardening &amp; tuning</li>
+          <li>Docker, CI/CD, backup terjadwal</li>
+          <li>Uptime monitoring &amp; alerting</li>
+        </ul>
+      </div>
+      <div class="panel srvmon">
+        <div class="panel-head"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>htop@srv-01</div>
+        <div class="panel-body">
+          <div class="meter"><div class="top"><span>CPU</span><b class="mv" data-to="34">0%</b></div><div class="bar"><span data-w="34"></span></div></div>
+          <div class="meter"><div class="top"><span>MEM</span><b class="mv" data-to="61">0%</b></div><div class="bar"><span data-w="61"></span></div></div>
+          <div class="meter"><div class="top"><span>DISK</span><b class="mv" data-to="48">0%</b></div><div class="bar"><span data-w="48"></span></div></div>
+          <div class="meter"><div class="top"><span>NET I/O</span><b class="mv" data-to="22">0%</b></div><div class="bar ok"><span data-w="22"></span></div></div>
+          <div class="srvlog" id="srvlog">
+            <div class="ln"><span class="cm">$</span> systemctl status nginx</div>
+            <div class="ln"><span class="g">● active (running)</span> since 42d ago</div>
+            <div class="ln"><span class="cm">$</span> docker ps <span class="a">— 7 containers up</span></div>
+            <div class="ln"><span class="g">● backup</span> completed · <span class="cm">03:00 WIB</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div></section>
@@ -273,6 +380,19 @@
     const el=e.target,t=+el.dataset.count,suf=el.dataset.suffix||'';let n=0,step=t/45;
     (function tick(){n+=step;if(n>=t)el.textContent=t+suf;else{el.textContent=Math.floor(n)+suf;requestAnimationFrame(tick);}})();cio.unobserve(el);}),{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  // server monitor: animate bars + values + logs when in view
+  const srvIO=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    document.querySelectorAll('.bar span').forEach(s=>s.style.width=s.dataset.w+'%');
+    document.querySelectorAll('.mv').forEach(b=>{
+      const to=+b.dataset.to;let n=0,st=to/40;
+      (function t(){n+=st;if(n>=to)b.textContent=to+'%';else{b.textContent=Math.floor(n)+'%';requestAnimationFrame(t);}})();
+    });
+    document.querySelectorAll('#srvlog .ln').forEach((l,idx)=>setTimeout(()=>l.classList.add('in'),idx*350));
+    srvIO.unobserve(e.target);
+  }),{threshold:.4});
+  const srv=document.querySelector('.srvmon');if(srv)srvIO.observe(srv);
 </script>
 </body>
 </html>
