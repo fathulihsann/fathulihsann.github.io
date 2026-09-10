@@ -3,249 +3,206 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nama Antum — Personal Site</title>
+<title>Fathul Ihsan — Portfolio</title>
 <style>
   :root{
-    --bg:#0e1016;
-    --bg-2:#141824;
-    --surface:#171b28;
-    --surface-hi:#1e2434;
-    --ink:#eef1f8;
-    --muted:#9aa3b8;
-    --border:rgba(255,255,255,.07);
-    --accent:#7c6cff;
-    --accent-2:#57e6c9;
-    --radius:22px;
-    --shadow-soft:
-      -10px -10px 24px rgba(255,255,255,.03),
-      14px 16px 40px rgba(0,0,0,.55);
-    --shadow-pop:
-      -6px -6px 18px rgba(255,255,255,.04),
-      20px 26px 60px rgba(0,0,0,.6);
+    --bg:#08090d;
+    --bg-2:#0e1016;
+    --ink:#f4f6fc;
+    --muted:#8b93a7;
+    --border:rgba(255,255,255,.08);
+    --accent:#6c5cff;
+    --accent-2:#4be3c0;
     --ease:cubic-bezier(.22,.61,.36,1);
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    margin:0;
     font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:
-      radial-gradient(1200px 700px at 80% -10%, rgba(124,108,255,.18), transparent 60%),
-      radial-gradient(900px 600px at -10% 20%, rgba(87,230,201,.12), transparent 55%),
-      var(--bg);
-    color:var(--ink);
-    line-height:1.55;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
+    background:var(--bg);color:var(--ink);line-height:1.5;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
   }
-  @font-face{font-family:"Space Grotesk";src:local("Space Grotesk")}
-  h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0}
-  p{margin:0}
+  h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.05}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-  section{position:relative;z-index:2}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
 
-  /* floating soft-3d blobs background */
-  .blobs{position:fixed;inset:0;z-index:0;pointer-events:none;filter:blur(30px);opacity:.9}
-  .blob{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:float 18s var(--ease) infinite}
-  .blob.a{width:420px;height:420px;top:-80px;right:-60px;background:radial-gradient(circle at 30% 30%,#8b7bff,#3a2f8f);animation-delay:0s}
-  .blob.b{width:360px;height:360px;bottom:-120px;left:-80px;background:radial-gradient(circle at 30% 30%,#57e6c9,#178f77);animation-delay:-6s}
-  .blob.c{width:280px;height:280px;top:40%;left:55%;background:radial-gradient(circle at 30% 30%,#ff8bd0,#8f2f6a);animation-delay:-11s;opacity:.6}
-  @keyframes float{0%,100%{transform:translateY(0) translateX(0) scale(1)}33%{transform:translateY(-40px) translateX(30px) scale(1.06)}66%{transform:translateY(30px) translateX(-20px) scale(.96)}}
+  /* ===== scroll progress bar ===== */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear}
 
-  /* nav */
-  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);
-    background:linear-gradient(to bottom,rgba(14,16,22,.85),rgba(14,16,22,.35));
-    border-bottom:1px solid var(--border)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto}
-  .logo{font-weight:700;letter-spacing:-.03em;font-size:20px}
-  .logo span{color:var(--accent)}
-  .nav-links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
-  .nav-links a{transition:color .25s}
-  .nav-links a:hover{color:var(--ink)}
+  /* ===== nav ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:20px 0;
+    transition:background .4s,backdrop-filter .4s,padding .4s}
+  nav.solid{background:rgba(8,9,13,.7);backdrop-filter:blur(16px);padding:14px 0;border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center}
+  .logo{font-weight:700;font-size:19px;letter-spacing:-.03em}
+  .logo b{color:var(--accent)}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--ink)}
   @media(max-width:640px){.nav-links{display:none}}
 
-  /* hero */
-  header.hero{padding:110px 0 90px;text-align:center}
-  .eyebrow{display:inline-block;font-size:13px;color:var(--accent-2);letter-spacing:.14em;
-    text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-radius:999px;
-    background:var(--surface);box-shadow:var(--shadow-soft);margin-bottom:26px}
-  header.hero h1{font-size:clamp(38px,7vw,76px)}
-  header.hero h1 .grad{
-    background:linear-gradient(120deg,var(--accent),var(--accent-2));
-    -webkit-background-clip:text;background-clip:text;color:transparent}
-  header.hero p.lead{max-width:560px;margin:26px auto 0;color:var(--muted);font-size:clamp(16px,2.5vw,19px)}
-  .cta{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap}
-  .btn{padding:14px 26px;border-radius:16px;font-size:15px;font-weight:500;cursor:pointer;border:none;
-    transition:transform .3s var(--ease),box-shadow .3s var(--ease);position:relative}
-  .btn.primary{color:#0e1016;background:linear-gradient(120deg,var(--accent),var(--accent-2));box-shadow:var(--shadow-pop)}
-  .btn.ghost{color:var(--ink);background:var(--surface);box-shadow:var(--shadow-soft)}
-  .btn:hover{transform:translateY(-4px)}
-  .btn:active{transform:translateY(-1px) scale(.99)}
+  /* ===== EFFECT 1: pinned hero that scales & fades on scroll ===== */
+  .hero-pin{height:200vh;position:relative}
+  .hero-sticky{position:sticky;top:0;height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:radial-gradient(900px 600px at 50% 30%,rgba(108,92,255,.22),transparent 60%),
+    radial-gradient(700px 500px at 80% 80%,rgba(75,227,192,.14),transparent 55%)}
+  .hero-content{position:relative;z-index:2;padding:0 28px;will-change:transform,opacity}
+  .hero-eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-2);margin-bottom:26px}
+  .hero-content h1{font-size:clamp(44px,9vw,120px);letter-spacing:-.04em}
+  .hero-content h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-content p{color:var(--muted);font-size:clamp(15px,2.4vw,20px);max-width:520px;margin:28px auto 0}
+  .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;
+    font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:bob 2s var(--ease) infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
-  /* floating 3d avatar card */
-  .avatar-card{margin:56px auto 0;width:min(340px,80vw);aspect-ratio:1;border-radius:var(--radius);
-    background:linear-gradient(145deg,var(--surface-hi),var(--surface));box-shadow:var(--shadow-pop);
-    display:grid;place-items:center;transform-style:preserve-3d;transition:transform .2s var(--ease);position:relative}
-  .avatar-card .glyph{font-size:clamp(80px,18vw,130px);font-weight:700;
-    background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;
-    transform:translateZ(50px)}
-  .avatar-card .ring{position:absolute;inset:14px;border:1px solid var(--border);border-radius:calc(var(--radius) - 8px);transform:translateZ(20px)}
+  /* ===== EFFECT 2: word-by-word text reveal ===== */
+  .statement{padding:34vh 0}
+  .big-line{font-size:clamp(30px,6vw,66px);font-weight:600;letter-spacing:-.03em;line-height:1.15;max-width:15ch}
+  .big-line .w{display:inline-block;opacity:.12;transition:opacity .5s var(--ease),transform .5s var(--ease);transform:translateY(.15em)}
+  .big-line .w.lit{opacity:1;transform:none}
+  .big-line .accent{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  /* section head */
-  .sec-head{margin-bottom:44px}
-  .sec-head .num{font-size:13px;color:var(--accent);letter-spacing:.16em;text-transform:uppercase}
-  .sec-head h2{font-size:clamp(28px,5vw,44px);margin-top:10px}
-  .sec-head p{color:var(--muted);margin-top:12px;max-width:520px}
-  section.block{padding:90px 0}
+  /* ===== EFFECT 3: counters that count up ===== */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:60px 0}
+  @media(max-width:700px){.stats{grid-template-columns:1fr}}
+  .stat{padding:34px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.03),transparent)}
+  .stat .num{font-size:clamp(40px,6vw,64px);font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .lbl{color:var(--muted);font-size:14px;margin-top:8px}
 
-  /* about */
-  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:start}
-  @media(max-width:760px){.about-grid{grid-template-columns:1fr}}
-  .about-text p{color:var(--muted);margin-bottom:16px}
-  .stat-stack{display:grid;gap:16px}
-  .stat{padding:24px;border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-soft);border:1px solid var(--border)}
-  .stat b{font-size:32px;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .stat span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+  /* ===== EFFECT 4: pinned horizontal scroll gallery ===== */
+  .horiz-pin{height:320vh;position:relative}
+  .horiz-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+  .horiz-track{display:flex;gap:28px;padding:0 28px;will-change:transform}
+  .h-card{flex:0 0 clamp(280px,42vw,460px);height:64vh;border-radius:24px;padding:34px;
+    border:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+  .h-card:nth-child(1){background:linear-gradient(160deg,#241f52,#0e1016)}
+  .h-card:nth-child(2){background:linear-gradient(160deg,#123f3a,#0e1016)}
+  .h-card:nth-child(3){background:linear-gradient(160deg,#3a1a3f,#0e1016)}
+  .h-card:nth-child(4){background:linear-gradient(160deg,#1a2c4a,#0e1016)}
+  .h-card .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+  .h-card h3{font-size:clamp(24px,3.5vw,34px);margin:14px 0 10px}
+  .h-card p{color:var(--muted);font-size:15px;max-width:36ch}
+  .horiz-head{position:absolute;top:14vh;left:28px;z-index:5}
+  .horiz-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .horiz-head h2{font-size:clamp(26px,4vw,40px);margin-top:8px}
 
-  /* skills chips */
-  .chips{display:flex;flex-wrap:wrap;gap:12px}
-  .chip{padding:11px 18px;border-radius:14px;background:var(--surface);box-shadow:var(--shadow-soft);
-    border:1px solid var(--border);font-size:14px;color:var(--muted);transition:transform .25s var(--ease),color .25s}
-  .chip:hover{transform:translateY(-3px);color:var(--ink)}
+  /* ===== EFFECT 5: stacking cards (sticky pile) ===== */
+  .stack{padding:80px 0 40px}
+  .stack-head{margin-bottom:40px}
+  .stack-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .stack-head h2{font-size:clamp(28px,5vw,48px);margin-top:10px}
+  .stack-item{position:sticky;top:12vh;margin-bottom:40px}
+  .stack-card{border:1px solid var(--border);border-radius:24px;padding:clamp(30px,5vw,56px);
+    background:var(--bg-2);box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+  .stack-card .k{font-size:14px;color:var(--accent-2);letter-spacing:.1em;text-transform:uppercase}
+  .stack-card h3{font-size:clamp(24px,4vw,40px);margin:16px 0 14px}
+  .stack-card p{color:var(--muted);max-width:60ch;font-size:16px}
 
-  /* projects tilt cards */
-  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  @media(max-width:860px){.grid-3{grid-template-columns:1fr}}
-  .card{padding:28px;border-radius:var(--radius);background:linear-gradient(145deg,var(--surface-hi),var(--surface));
-    box-shadow:var(--shadow-soft);border:1px solid var(--border);transform-style:preserve-3d;
-    transition:transform .18s var(--ease),box-shadow .3s var(--ease);cursor:pointer;position:relative;overflow:hidden}
-  .card:hover{box-shadow:var(--shadow-pop)}
-  .card .tag{font-size:12px;color:var(--accent-2);letter-spacing:.1em;text-transform:uppercase}
-  .card h3{font-size:21px;margin:12px 0 10px;transform:translateZ(30px)}
-  .card p{color:var(--muted);font-size:14.5px;transform:translateZ(15px)}
-  .card .arrow{margin-top:20px;color:var(--accent);font-size:14px;transform:translateZ(30px)}
-  .card::after{content:"";position:absolute;inset:0;background:radial-gradient(400px at var(--mx,50%) var(--my,50%),rgba(124,108,255,.14),transparent 60%);opacity:0;transition:opacity .3s}
-  .card:hover::after{opacity:1}
-
-  /* contact */
-  .contact{text-align:center;padding:100px 0}
-  .contact h2{font-size:clamp(30px,6vw,56px)}
-  .contact .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .contact p{color:var(--muted);margin:18px auto 34px;max-width:440px}
-  .socials{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-
-  footer{text-align:center;padding:40px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
-
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  /* ===== reveal utility ===== */
+  .reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
   .reveal.in{opacity:1;transform:none}
 
-  /* tweaks panel */
-  .tweaks{position:fixed;right:18px;bottom:18px;z-index:50}
-  .tweaks .toggle{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
-    background:linear-gradient(120deg,var(--accent),var(--accent-2));box-shadow:var(--shadow-pop);
-    color:#0e1016;font-size:22px;display:grid;place-items:center;transition:transform .3s var(--ease)}
-  .tweaks .toggle:hover{transform:rotate(45deg)}
-  .tweaks .panel{position:absolute;right:0;bottom:64px;width:230px;padding:20px;border-radius:18px;
-    background:var(--surface);box-shadow:var(--shadow-pop);border:1px solid var(--border);
-    opacity:0;transform:translateY(10px) scale(.96);pointer-events:none;transition:all .3s var(--ease)}
-  .tweaks.open .panel{opacity:1;transform:none;pointer-events:auto}
-  .tweaks h4{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
-  .swatches{display:flex;gap:10px;margin-bottom:18px}
-  .sw{width:30px;height:30px;border-radius:9px;cursor:pointer;border:2px solid transparent;transition:transform .2s}
-  .sw:hover{transform:scale(1.12)}
-  .sw.sel{border-color:#fff}
-  .row{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
-  .switch{width:42px;height:24px;border-radius:999px;background:var(--surface-hi);position:relative;cursor:pointer;transition:background .3s}
-  .switch.on{background:var(--accent)}
-  .switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .3s var(--ease)}
-  .switch.on::after{left:21px}
+  /* ===== EFFECT 6: parallax marquee ===== */
+  .marquee{padding:120px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .marquee-inner{display:inline-block;font-size:clamp(50px,12vw,140px);font-weight:700;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);will-change:transform}
+  .marquee-inner .fill{-webkit-text-stroke:0;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  body.no-motion .blob{animation:none}
-  body.no-motion .reveal{opacity:1;transform:none;transition:none}
+  /* ===== contact ===== */
+  .contact{padding:16vh 0;text-align:center}
+  .contact h2{font-size:clamp(40px,9vw,110px);letter-spacing:-.04em}
+  .contact h2 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .contact p{color:var(--muted);margin:24px auto 40px;max-width:440px}
+  .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:15px 30px;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:transform .3s var(--ease)}
+  .btn.primary{color:#08090d;background:linear-gradient(120deg,var(--accent),var(--accent-2))}
+  .btn.ghost{color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--border)}
+  .btn:hover{transform:translateY(-4px)}
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+    .big-line .w{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
-  <div class="blobs"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
+  <div id="progress"></div>
 
-  <nav>
-    <div class="nav-inner">
-      <div class="logo">N<span>.</span>Antum</div>
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <div class="logo">Fathul<b>.</b></div>
       <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#work">Work</a>
-        <a href="#contact">Contact</a>
+        <a href="#work">Work</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <header class="hero wrap">
-    <span class="eyebrow reveal">Network &amp; Infra Engineer</span>
-    <h1 class="reveal">Halo, ane <span class="grad">Nama Antum</span><br/>bikin sistem yang <span class="grad">jalan mulus</span>.</h1>
-    <p class="lead reveal">Placeholder headline — ganti dengan deskripsi singkat antum. Contoh: "Ngurusin jaringan, server, dan automasi biar tim bisa fokus kerja, bukan mikirin downtime."</p>
-    <div class="cta reveal">
-      <button class="btn primary" onclick="document.getElementById('work').scrollIntoView()">Lihat Karya</button>
-      <button class="btn ghost" onclick="document.getElementById('contact').scrollIntoView()">Hubungi</button>
+  <!-- EFFECT 1: pinned scaling hero -->
+  <div class="hero-pin">
+    <div class="hero-sticky">
+      <div class="hero-bg"></div>
+      <div class="hero-content" id="heroContent">
+        <div class="hero-eyebrow">Network &amp; Infra Engineer</div>
+        <h1>Bikin sistem<br/>yang <span class="grad">jalan sendiri.</span></h1>
+        <p>Placeholder — deskripsi singkat antum. Ganti dengan tagline yang nendang tentang apa yang antum kerjain.</p>
+      </div>
+      <div class="scroll-hint">Scroll ↓</div>
     </div>
-    <div class="avatar-card reveal" id="tiltAvatar">
-      <div class="ring"></div>
-      <div class="glyph">NA</div>
-    </div>
-  </header>
+  </div>
 
-  <section class="block wrap" id="about">
-    <div class="sec-head reveal">
-      <div class="num">01 — About</div>
-      <h2>Sedikit tentang ane</h2>
-      <p>Placeholder — ceritakan latar belakang, apa yang antum kerjain, dan apa yang bikin antum beda.</p>
-    </div>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Ini paragraf placeholder. Ceritakan perjalanan antum: mulai dari mana, sekarang fokus di apa, dan hal yang paling antum nikmati dari pekerjaan.</p>
-        <p>Paragraf kedua: gaya kerja, nilai yang antum pegang, atau pencapaian yang antum banggakan. Ganti semua teks ini dengan cerita asli antum.</p>
-      </div>
-      <div class="stat-stack reveal">
-        <div class="stat"><b>5+</b><span>Tahun pengalaman</span></div>
-        <div class="stat"><b>20+</b><span>Project ditangani</span></div>
-        <div class="stat"><b>99.9%</b><span>Uptime target</span></div>
-      </div>
+  <!-- EFFECT 2: word-by-word statement -->
+  <section class="statement wrap">
+    <p class="big-line" data-reveal-words>
+      Ane bantu bisnis <span class="accent">otomatisin</span> infrastruktur biar tim fokus ke hal yang <span class="accent">beneran penting.</span>
+    </p>
+  </section>
+
+  <!-- EFFECT 3: counters -->
+  <section class="wrap">
+    <div class="stats">
+      <div class="stat reveal"><div class="num" data-count="5">0</div><div class="lbl">Tahun pengalaman</div></div>
+      <div class="stat reveal"><div class="num" data-count="20" data-suffix="+">0</div><div class="lbl">Project selesai</div></div>
+      <div class="stat reveal"><div class="num" data-count="99" data-suffix="%">0</div><div class="lbl">Uptime rata-rata</div></div>
     </div>
   </section>
 
-  <section class="block wrap" id="skills">
-    <div class="sec-head reveal">
-      <div class="num">02 — Skills</div>
-      <h2>Yang ane kuasai</h2>
-      <p>Placeholder — daftar skill utama antum. Hapus/tambah sesuai kebutuhan.</p>
+  <!-- EFFECT 4: pinned horizontal scroll -->
+  <div class="horiz-pin" id="work">
+    <div class="horiz-sticky">
+      <div class="horiz-head"><div class="num">01 — Work</div><h2>Karya pilihan.</h2></div>
+      <div class="horiz-track" id="horizTrack">
+        <div class="h-card"><div><span class="tag">Automation</span><h3>Project Satu</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Infra</span><h3>Project Dua</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Web App</span><h3>Project Tiga</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Network</span><h3>Project Empat</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+      </div>
     </div>
-    <div class="chips reveal">
-      <div class="chip">Laravel</div><div class="chip">React</div><div class="chip">Networking</div>
-      <div class="chip">Linux Server</div><div class="chip">Automation</div><div class="chip">Docker</div>
-      <div class="chip">CI/CD</div><div class="chip">MikroTik</div><div class="chip">Cloud</div>
-      <div class="chip">MySQL</div><div class="chip">Monitoring</div>
-    </div>
+  </div>
+
+  <!-- EFFECT 5: stacking cards -->
+  <section class="stack wrap" id="services">
+    <div class="stack-head reveal"><div class="num">02 — Services</div><h2>Yang bisa ane kerjain.</h2></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 01</div><h3>Network &amp; RF Planning</h3><p>Placeholder — desain coverage WiFi multi-AP, channel plan, roaming (802.11k/v/r), troubleshoot dead zone. Ganti sesuai layanan antum.</p></div></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 02</div><h3>Server &amp; Automation</h3><p>Placeholder — setup server, monitoring, CI/CD, automasi task berulang biar hemat waktu tim.</p></div></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 03</div><h3>Web Development</h3><p>Placeholder — bikin aplikasi web (Laravel + React) dari nol sampai deploy.</p></div></div>
   </section>
 
-  <section class="block wrap" id="work">
-    <div class="sec-head reveal">
-      <div class="num">03 — Work</div>
-      <h2>Karya pilihan</h2>
-      <p>Placeholder — 3 project terbaik antum. Klik-tilt kartunya untuk lihat efeknya.</p>
-    </div>
-    <div class="grid-3">
-      <div class="card tilt reveal"><div class="tag">Automation</div><h3>Project Satu</h3><p>Deskripsi singkat placeholder — apa masalahnya, apa yang antum bangun, hasilnya apa.</p><div class="arrow">Lihat detail →</div></div>
-      <div class="card tilt reveal"><div class="tag">Infra</div><h3>Project Dua</h3><p>Deskripsi singkat placeholder — apa masalahnya, apa yang antum bangun, hasilnya apa.</p><div class="arrow">Lihat detail →</div></div>
-      <div class="card tilt reveal"><div class="tag">Web App</div><h3>Project Tiga</h3><p>Deskripsi singkat placeholder — apa masalahnya, apa yang antum bangun, hasilnya apa.</p><div class="arrow">Lihat detail →</div></div>
-    </div>
+  <!-- EFFECT 6: parallax marquee -->
+  <div class="marquee"><div class="marquee-inner" id="marquee">Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;</div></div>
+
+  <!-- about + contact -->
+  <section class="statement wrap" id="about">
+    <p class="big-line" data-reveal-words>
+      Latar belakang <span class="accent">jaringan &amp; server</span>, sekarang fokus bikin sistem yang <span class="accent">nggak perlu dijaga.</span>
+    </p>
   </section>
 
   <section class="contact wrap" id="contact">
     <div class="reveal">
-      <h2>Yuk <span class="grad">ngobrol</span>.</h2>
-      <p>Placeholder — ajakan kontak. Contoh: "Punya project atau mau kolaborasi? Kirim pesan aja."</p>
+      <h2>Yuk <span class="grad">ngobrol.</span></h2>
+      <p>Placeholder — ajakan kontak. Punya project atau mau kolaborasi? Kirim pesan aja.</p>
       <div class="socials">
         <button class="btn primary">Email</button>
         <button class="btn ghost">LinkedIn</button>
@@ -254,58 +211,94 @@
     </div>
   </section>
 
-  <footer>© <span id="yr"></span> Nama Antum — Dibangun dengan ❤️. Ganti footer ini.</footer>
-
-  <div class="tweaks" id="tweaks">
-    <div class="panel">
-      <h4>Accent</h4>
-      <div class="swatches">
-        <div class="sw sel" style="background:#7c6cff" data-a="#7c6cff" data-b="#57e6c9"></div>
-        <div class="sw" style="background:#ff7ab6" data-a="#ff7ab6" data-b="#ffb86c"></div>
-        <div class="sw" style="background:#4ea8ff" data-a="#4ea8ff" data-b="#7c6cff"></div>
-        <div class="sw" style="background:#57e6c9" data-a="#57e6c9" data-b="#4ea8ff"></div>
-      </div>
-      <div class="row"><span>Motion</span><div class="switch on" id="motionSw"></div></div>
-    </div>
-    <button class="toggle" onclick="document.getElementById('tweaks').classList.toggle('open')">✦</button>
-  </div>
+  <footer>© <span id="yr"></span> Fathul Ihsan — Ganti footer ini.</footer>
 
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-  // scroll reveal
-  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
-
-  // 3d tilt for cards
-  function tilt(el,max){
-    el.addEventListener('pointermove',ev=>{
-      if(document.body.classList.contains('no-motion'))return;
-      const r=el.getBoundingClientRect();
-      const px=(ev.clientX-r.left)/r.width, py=(ev.clientY-r.top)/r.height;
-      el.style.transform=`perspective(700px) rotateY(${(px-.5)*max}deg) rotateX(${-(py-.5)*max}deg) translateY(-4px)`;
-      el.style.setProperty('--mx',px*100+'%');el.style.setProperty('--my',py*100+'%');
-    });
-    el.addEventListener('pointerleave',()=>{el.style.transform=''});
-  }
-  document.querySelectorAll('.tilt').forEach(c=>tilt(c,10));
-  tilt(document.getElementById('tiltAvatar'),14);
-
-  // avatar idle float
-  const av=document.getElementById('tiltAvatar');let t=0;
-  (function idle(){if(!document.body.classList.contains('no-motion')&&!av.style.transform.includes('rotate')){t+=.02;av.style.transform=`translateY(${Math.sin(t)*8}px)`}requestAnimationFrame(idle)})();
-
-  // accent swatches
-  document.querySelectorAll('.sw').forEach(s=>s.addEventListener('click',()=>{
-    document.querySelectorAll('.sw').forEach(x=>x.classList.remove('sel'));s.classList.add('sel');
-    document.documentElement.style.setProperty('--accent',s.dataset.a);
-    document.documentElement.style.setProperty('--accent-2',s.dataset.b);
-  }));
-
-  // motion toggle
-  document.getElementById('motionSw').addEventListener('click',function(){
-    this.classList.toggle('on');document.body.classList.toggle('no-motion',!this.classList.contains('on'));
+  // split words for reveal
+  document.querySelectorAll('[data-reveal-words]').forEach(el=>{
+    const walk=n=>{
+      [...n.childNodes].forEach(c=>{
+        if(c.nodeType===3){
+          const frag=document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(t=>{
+            if(t.trim()){const s=document.createElement('span');s.className='w';s.textContent=t;frag.appendChild(s);}
+            else frag.appendChild(document.createTextNode(t));
+          });
+          c.replaceWith(frag);
+        } else if(c.nodeType===1){ c.classList.add('w'); }
+      });
+    };
+    walk(el);
   });
+
+  const nav=document.getElementById('nav');
+  const hero=document.getElementById('heroContent');
+  const heroPin=document.querySelector('.hero-pin');
+  const track=document.getElementById('horizTrack');
+  const horizPin=document.querySelector('.horiz-pin');
+  const marquee=document.getElementById('marquee');
+  const progress=document.getElementById('progress');
+  const words=[...document.querySelectorAll('.big-line')];
+
+  function onScroll(){
+    const y=window.scrollY, vh=innerHeight;
+    // progress bar
+    const max=document.documentElement.scrollHeight-vh;
+    progress.style.width=(y/max*100)+'%';
+    // nav solidify
+    nav.classList.toggle('solid',y>60);
+
+    // EFFECT 1: hero scale + fade over its pin range
+    const hp=heroPin.getBoundingClientRect();
+    const hProg=clamp(-hp.top/(heroPin.offsetHeight-vh),0,1);
+    hero.style.transform=`scale(${1-hProg*0.25}) translateY(${hProg*-40}px)`;
+    hero.style.opacity=String(1-hProg*1.1);
+
+    // EFFECT 4: horizontal scroll mapped to vertical progress
+    const zp=horizPin.getBoundingClientRect();
+    const zProg=clamp(-zp.top/(horizPin.offsetHeight-vh),0,1);
+    const shift=(track.scrollWidth-innerWidth+56);
+    track.style.transform=`translateX(${-shift*zProg}px)`;
+
+    // EFFECT 6: marquee parallax
+    marquee.style.transform=`translateX(${-(y*0.08)%50-10}%)`;
+
+    // EFFECT 2: word reveal based on scroll position of each line
+    words.forEach(line=>{
+      const r=line.getBoundingClientRect();
+      const ws=[...line.querySelectorAll('.w')];
+      const start=vh*0.85, end=vh*0.35;
+      const p=clamp((start-r.top)/(start-end),0,1);
+      const lit=Math.round(p*ws.length);
+      ws.forEach((w,i)=>w.classList.toggle('lit',i<lit));
+    });
+  }
+  addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+
+  // reveal + counters via IntersectionObserver
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      const c=e.target.querySelector?.('[data-count]')||(e.target.dataset&&e.target.dataset.count!==undefined?e.target:null);
+      io.unobserve(e.target);
+    }
+  }),{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // counters
+  const cio=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target, target=+el.dataset.count, suf=el.dataset.suffix||'';
+    let n=0; const step=target/45;
+    const tick=()=>{n+=step; if(n>=target){el.textContent=target+suf;} else {el.textContent=Math.floor(n)+suf;requestAnimationFrame(tick);}};
+    tick(); cio.unobserve(el);
+  }),{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
 </script>
 </body>
 </html>
