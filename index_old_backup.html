@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fathul Ihsan — Portfolio</title>
+<style>
+  :root{
+    --bg:#08090d;
+    --bg-2:#0e1016;
+    --ink:#f4f6fc;
+    --muted:#8b93a7;
+    --border:rgba(255,255,255,.08);
+    --accent:#6c5cff;
+    --accent-2:#4be3c0;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.05}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+
+  /* ===== scroll progress bar ===== */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear}
+
+  /* ===== nav ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:20px 0;
+    transition:background .4s,backdrop-filter .4s,padding .4s}
+  nav.solid{background:rgba(8,9,13,.7);backdrop-filter:blur(16px);padding:14px 0;border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center}
+  .logo{font-weight:700;font-size:19px;letter-spacing:-.03em}
+  .logo b{color:var(--accent)}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--ink)}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* ===== EFFECT 1: pinned hero that scales & fades on scroll ===== */
+  .hero-pin{height:200vh;position:relative}
+  .hero-sticky{position:sticky;top:0;height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:radial-gradient(900px 600px at 50% 30%,rgba(108,92,255,.22),transparent 60%),
+    radial-gradient(700px 500px at 80% 80%,rgba(75,227,192,.14),transparent 55%)}
+  .hero-content{position:relative;z-index:2;padding:0 28px;will-change:transform,opacity}
+  .hero-eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-2);margin-bottom:26px}
+  .hero-content h1{font-size:clamp(44px,9vw,120px);letter-spacing:-.04em}
+  .hero-content h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-content p{color:var(--muted);font-size:clamp(15px,2.4vw,20px);max-width:520px;margin:28px auto 0}
+  .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;
+    font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:bob 2s var(--ease) infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ===== EFFECT 2: word-by-word text reveal ===== */
+  .statement{padding:34vh 0}
+  .big-line{font-size:clamp(30px,6vw,66px);font-weight:600;letter-spacing:-.03em;line-height:1.15;max-width:15ch}
+  .big-line .w{display:inline-block;opacity:.12;transition:opacity .5s var(--ease),transform .5s var(--ease);transform:translateY(.15em)}
+  .big-line .w.lit{opacity:1;transform:none}
+  .big-line .accent{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ===== EFFECT 3: counters that count up ===== */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:60px 0}
+  @media(max-width:700px){.stats{grid-template-columns:1fr}}
+  .stat{padding:34px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.03),transparent)}
+  .stat .num{font-size:clamp(40px,6vw,64px);font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .lbl{color:var(--muted);font-size:14px;margin-top:8px}
+
+  /* ===== EFFECT 4: pinned horizontal scroll gallery ===== */
+  .horiz-pin{height:320vh;position:relative}
+  .horiz-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+  .horiz-track{display:flex;gap:28px;padding:0 28px;will-change:transform}
+  .h-card{flex:0 0 clamp(280px,42vw,460px);height:64vh;border-radius:24px;padding:34px;
+    border:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+  .h-card:nth-child(1){background:linear-gradient(160deg,#241f52,#0e1016)}
+  .h-card:nth-child(2){background:linear-gradient(160deg,#123f3a,#0e1016)}
+  .h-card:nth-child(3){background:linear-gradient(160deg,#3a1a3f,#0e1016)}
+  .h-card:nth-child(4){background:linear-gradient(160deg,#1a2c4a,#0e1016)}
+  .h-card .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+  .h-card h3{font-size:clamp(24px,3.5vw,34px);margin:14px 0 10px}
+  .h-card p{color:var(--muted);font-size:15px;max-width:36ch}
+  .horiz-head{position:absolute;top:14vh;left:28px;z-index:5}
+  .horiz-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .horiz-head h2{font-size:clamp(26px,4vw,40px);margin-top:8px}
+
+  /* ===== EFFECT 5: stacking cards (sticky pile) ===== */
+  .stack{padding:80px 0 40px}
+  .stack-head{margin-bottom:40px}
+  .stack-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .stack-head h2{font-size:clamp(28px,5vw,48px);margin-top:10px}
+  .stack-item{position:sticky;top:12vh;margin-bottom:40px}
+  .stack-card{border:1px solid var(--border);border-radius:24px;padding:clamp(30px,5vw,56px);
+    background:var(--bg-2);box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+  .stack-card .k{font-size:14px;color:var(--accent-2);letter-spacing:.1em;text-transform:uppercase}
+  .stack-card h3{font-size:clamp(24px,4vw,40px);margin:16px 0 14px}
+  .stack-card p{color:var(--muted);max-width:60ch;font-size:16px}
+
+  /* ===== reveal utility ===== */
+  .reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== EFFECT 6: parallax marquee ===== */
+  .marquee{padding:120px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .marquee-inner{display:inline-block;font-size:clamp(50px,12vw,140px);font-weight:700;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);will-change:transform}
+  .marquee-inner .fill{-webkit-text-stroke:0;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ===== contact ===== */
+  .contact{padding:16vh 0;text-align:center}
+  .contact h2{font-size:clamp(40px,9vw,110px);letter-spacing:-.04em}
+  .contact h2 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .contact p{color:var(--muted);margin:24px auto 40px;max-width:440px}
+  .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{padding:15px 30px;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:transform .3s var(--ease)}
+  .btn.primary{color:#08090d;background:linear-gradient(120deg,var(--accent),var(--accent-2))}
+  .btn.ghost{color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--border)}
+  .btn:hover{transform:translateY(-4px)}
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+    .big-line .w{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <div class="logo">Fathul<b>.</b></div>
+      <div class="nav-links">
+        <a href="#work">Work</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- EFFECT 1: pinned scaling hero -->
+  <div class="hero-pin">
+    <div class="hero-sticky">
+      <div class="hero-bg"></div>
+      <div class="hero-content" id="heroContent">
+        <div class="hero-eyebrow">Network &amp; Infra Engineer</div>
+        <h1>Bikin sistem<br/>yang <span class="grad">jalan sendiri.</span></h1>
+        <p>Placeholder — deskripsi singkat antum. Ganti dengan tagline yang nendang tentang apa yang antum kerjain.</p>
+      </div>
+      <div class="scroll-hint">Scroll ↓</div>
+    </div>
+  </div>
+
+  <!-- EFFECT 2: word-by-word statement -->
+  <section class="statement wrap">
+    <p class="big-line" data-reveal-words>
+      Ane bantu bisnis <span class="accent">otomatisin</span> infrastruktur biar tim fokus ke hal yang <span class="accent">beneran penting.</span>
+    </p>
+  </section>
+
+  <!-- EFFECT 3: counters -->
+  <section class="wrap">
+    <div class="stats">
+      <div class="stat reveal"><div class="num" data-count="5">0</div><div class="lbl">Tahun pengalaman</div></div>
+      <div class="stat reveal"><div class="num" data-count="20" data-suffix="+">0</div><div class="lbl">Project selesai</div></div>
+      <div class="stat reveal"><div class="num" data-count="99" data-suffix="%">0</div><div class="lbl">Uptime rata-rata</div></div>
+    </div>
+  </section>
+
+  <!-- EFFECT 4: pinned horizontal scroll -->
+  <div class="horiz-pin" id="work">
+    <div class="horiz-sticky">
+      <div class="horiz-head"><div class="num">01 — Work</div><h2>Karya pilihan.</h2></div>
+      <div class="horiz-track" id="horizTrack">
+        <div class="h-card"><div><span class="tag">Automation</span><h3>Project Satu</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Infra</span><h3>Project Dua</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Web App</span><h3>Project Tiga</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+        <div class="h-card"><div><span class="tag">Network</span><h3>Project Empat</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EFFECT 5: stacking cards -->
+  <section class="stack wrap" id="services">
+    <div class="stack-head reveal"><div class="num">02 — Services</div><h2>Yang bisa ane kerjain.</h2></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 01</div><h3>Network &amp; RF Planning</h3><p>Placeholder — desain coverage WiFi multi-AP, channel plan, roaming (802.11k/v/r), troubleshoot dead zone. Ganti sesuai layanan antum.</p></div></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 02</div><h3>Server &amp; Automation</h3><p>Placeholder — setup server, monitoring, CI/CD, automasi task berulang biar hemat waktu tim.</p></div></div>
+    <div class="stack-item"><div class="stack-card"><div class="k">Layanan 03</div><h3>Web Development</h3><p>Placeholder — bikin aplikasi web (Laravel + React) dari nol sampai deploy.</p></div></div>
+  </section>
+
+  <!-- EFFECT 6: parallax marquee -->
+  <div class="marquee"><div class="marquee-inner" id="marquee">Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;</div></div>
+
+  <!-- about + contact -->
+  <section class="statement wrap" id="about">
+    <p class="big-line" data-reveal-words>
+      Latar belakang <span class="accent">jaringan &amp; server</span>, sekarang fokus bikin sistem yang <span class="accent">nggak perlu dijaga.</span>
+    </p>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="reveal">
+      <h2>Yuk <span class="grad">ngobrol.</span></h2>
+      <p>Placeholder — ajakan kontak. Punya project atau mau kolaborasi? Kirim pesan aja.</p>
+      <div class="socials">
+        <button class="btn primary">Email</button>
+        <button class="btn ghost">LinkedIn</button>
+        <button class="btn ghost">GitHub</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="yr"></span> Fathul Ihsan — Ganti footer ini.</footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+  // split words for reveal
+  document.querySelectorAll('[data-reveal-words]').forEach(el=>{
+    const walk=n=>{
+      [...n.childNodes].forEach(c=>{
+        if(c.nodeType===3){
+          const frag=document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(t=>{
+            if(t.trim()){const s=document.createElement('span');s.className='w';s.textContent=t;frag.appendChild(s);}
+            else frag.appendChild(document.createTextNode(t));
+          });
+          c.replaceWith(frag);
+        } else if(c.nodeType===1){ c.classList.add('w'); }
+      });
+    };
+    walk(el);
+  });
+
+  const nav=document.getElementById('nav');
+  const hero=document.getElementById('heroContent');
+  const heroPin=document.querySelector('.hero-pin');
+  const track=document.getElementById('horizTrack');
+  const horizPin=document.querySelector('.horiz-pin');
+  const marquee=document.getElementById('marquee');
+  const progress=document.getElementById('progress');
+  const words=[...document.querySelectorAll('.big-line')];
+
+  function onScroll(){
+    const y=window.scrollY, vh=innerHeight;
+    // progress bar
+    const max=document.documentElement.scrollHeight-vh;
+    progress.style.width=(y/max*100)+'%';
+    // nav solidify
+    nav.classList.toggle('solid',y>60);
+
+    // EFFECT 1: hero scale + fade over its pin range
+    const hp=heroPin.getBoundingClientRect();
+    const hProg=clamp(-hp.top/(heroPin.offsetHeight-vh),0,1);
+    hero.style.transform=`scale(${1-hProg*0.25}) translateY(${hProg*-40}px)`;
+    hero.style.opacity=String(1-hProg*1.1);
+
+    // EFFECT 4: horizontal scroll mapped to vertical progress
+    const zp=horizPin.getBoundingClientRect();
+    const zProg=clamp(-zp.top/(horizPin.offsetHeight-vh),0,1);
+    const shift=(track.scrollWidth-innerWidth+56);
+    track.style.transform=`translateX(${-shift*zProg}px)`;
+
+    // EFFECT 6: marquee parallax
+    marquee.style.transform=`translateX(${-(y*0.08)%50-10}%)`;
+
+    // EFFECT 2: word reveal based on scroll position of each line
+    words.forEach(line=>{
+      const r=line.getBoundingClientRect();
+      const ws=[...line.querySelectorAll('.w')];
+      const start=vh*0.85, end=vh*0.35;
+      const p=clamp((start-r.top)/(start-end),0,1);
+      const lit=Math.round(p*ws.length);
+      ws.forEach((w,i)=>w.classList.toggle('lit',i<lit));
+    });
+  }
+  addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+
+  // reveal + counters via IntersectionObserver
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      const c=e.target.querySelector?.('[data-count]')||(e.target.dataset&&e.target.dataset.count!==undefined?e.target:null);
+      io.unobserve(e.target);
+    }
+  }),{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // counters
+  const cio=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target, target=+el.dataset.count, suf=el.dataset.suffix||'';
+    let n=0; const step=target/45;
+    const tick=()=>{n+=step; if(n>=target){el.textContent=target+suf;} else {el.textContent=Math.floor(n)+suf;requestAnimationFrame(tick);}};
+    tick(); cio.unobserve(el);
+  }),{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+</script>
+</body>
+</html>
