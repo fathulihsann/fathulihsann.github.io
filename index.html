@@ -88,7 +88,7 @@
   .hero .roles .sep{color:var(--accent);margin:0 10px}
   .hero .tagline{color:var(--muted);max-width:540px;font-size:17px}
   .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-  .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:9px;cursor:pointer;border:1px solid var(--border);transition:.25s}
+  .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:9px;cursor:pointer;border:1px solid var(--border);transition:.25s;display:inline-block}
   .btn.primary{background:var(--accent);color:#0B192C;border-color:var(--accent);font-weight:600}
   .btn.primary:hover{background:var(--accent-2)}
   .btn.ghost{background:transparent;color:var(--ink)}
@@ -221,7 +221,7 @@
     <div class="roles">
       <span>Network</span><span class="sep">·</span><span>Server</span><span class="sep">·</span><span>AI</span>
     </div>
-    <p class="tagline">Placeholder — tagline singkat antum. Contoh: "Ngurusin jaringan, server, dan bikin sistem otomatis biar semuanya jalan sendiri."</p>
+    <p class="tagline">Network & Infrastructure Engineer yang merancang sistem agar tetap berjalan tanpa perlu terus diawasi — mulai dari topology jaringan, provisioning server, hingga automasi berbasis AI agent.</p>
     <div class="hero-cta">
       <button class="btn primary" onclick="document.getElementById('work').scrollIntoView()">./view_work.sh</button>
       <button class="btn ghost" onclick="document.getElementById('contact').scrollIntoView()">./contact.sh</button>
@@ -234,8 +234,8 @@
     <div class="panel reveal">
       <div class="panel-head"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>about.md</div>
       <div class="panel-body">
-        <p>Placeholder — latar belakang antum: mulai dari mana, sekarang fokus di apa (network, server, AI), dan hal yang paling antum nikmati.</p>
-        <p>Paragraf kedua: gaya kerja, nilai yang antum pegang, atau pencapaian yang dibanggakan. Ganti semua dengan cerita asli.</p>
+        <p>Network & Infrastructure Engineer dengan pengalaman lebih dari 5 tahun menangani perancangan jaringan, administrasi server, dan pengembangan aplikasi web (Laravel & React). Fokus utama pada RF planning, WiFi multi-access point, serta automasi infrastruktur agar sistem tetap stabil dengan intervensi manual seminimal mungkin.</p>
+        <p>Belakangan ini turut mendalami penerapan AI agent untuk operasional sehari-hari — mulai dari monitoring server, ringkasan berita jaringan, hingga command center berbasis Telegram yang mengatur beberapa asisten AI terspesialisasi dalam satu alur kerja.</p>
         <p class="out"><span class="cm"># status:</span> <span style="color:var(--green)">● available for work</span></p>
       </div>
     </div>
@@ -258,17 +258,17 @@
       <div class="pillar reveal">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="30" width="36" height="10" rx="2"/><circle cx="12" cy="35" r="1.5" fill="currentColor"/><circle cx="17" cy="35" r="1.5" fill="currentColor"/><path d="M24 30V18M14 18h20M14 18v-4M34 18v-4M10 10h8v4h-8zM30 10h8v4h-8z"/></svg>
         <div class="tag">[01] network</div><h3>Network Engineering</h3>
-        <p>Placeholder — routing, switching, WiFi/RF planning, roaming (802.11k/v/r), desain topology & troubleshoot.</p>
+        <p>Perancangan routing dan switching, WiFi multi-access point dengan RF planning, serta optimasi roaming (802.11k/v/r) untuk coverage yang stabil di seluruh area kerja.</p>
       </div>
       <div class="pillar reveal">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="7" width="30" height="10" rx="2"/><rect x="9" y="19" width="30" height="10" rx="2"/><rect x="9" y="31" width="30" height="10" rx="2"/><circle cx="14" cy="12" r="1.3" fill="currentColor"/><circle cx="14" cy="24" r="1.3" fill="currentColor"/><circle cx="14" cy="36" r="1.3" fill="currentColor"/></svg>
         <div class="tag">[02] server</div><h3>Server &amp; Automation</h3>
-        <p>Placeholder — Linux server, monitoring, CI/CD, Docker, automasi task berulang biar hemat waktu tim.</p>
+        <p>Administrasi server Linux, monitoring, CI/CD, dan containerization (Docker) — dengan automasi task rutin agar proses operasional berjalan konsisten dan minim downtime.</p>
       </div>
       <div class="pillar reveal">
         <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="5"/><circle cx="10" cy="12" r="3"/><circle cx="38" cy="12" r="3"/><circle cx="10" cy="36" r="3"/><circle cx="38" cy="36" r="3"/><path d="M20 21l-8-6M28 21l8-6M20 27l-8 6M28 27l8 6"/></svg>
         <div class="tag">[03] ai</div><h3>AI Enthusiast</h3>
-        <p>Placeholder — AI agents, automasi berbasis LLM, integrasi model ke workflow sehari-hari.</p>
+        <p>Perancangan dan orkestrasi AI agent untuk automasi operasional — dari monitoring, ringkasan informasi, hingga command center multi-asisten yang terintegrasi dalam satu workflow.</p>
       </div>
     </div>
 
@@ -277,7 +277,7 @@
       <div class="feat-text">
         <div class="tag">// network.topology</div>
         <h3>Merancang jaringan yang tetap nyambung.</h3>
-        <p>Placeholder — dari core switch sampai edge AP, ane desain topology yang redundant, minim bottleneck, dan gampang di-troubleshoot. Paket data di samping ini gambaran trafik yang mengalir antar node.</p>
+        <p>Dari core switch hingga edge access point, saya merancang topology yang redundant, minim bottleneck, dan mudah ditelusuri saat troubleshooting. Ilustrasi di samping menggambarkan alur trafik antar node dalam satu jaringan.</p>
         <ul>
           <li>Routing &amp; switching (Cisco / MikroTik)</li>
           <li>WiFi multi-AP + roaming 802.11k/v/r</li>
@@ -318,7 +318,7 @@
       <div class="feat-text">
         <div class="tag">// server.monitor</div>
         <h3>Menjaga server tetap sehat &amp; hidup.</h3>
-        <p>Placeholder — provisioning, monitoring, dan automasi biar downtime minim. Panel di samping meniru dashboard resource + log service yang ane pantau tiap hari.</p>
+        <p>Provisioning, monitoring, dan automasi backup terjadwal untuk meminimalkan downtime. Panel di samping mencerminkan dashboard resource dan log service yang dipantau secara berkala.</p>
         <ul>
           <li>Linux server hardening &amp; tuning</li>
           <li>Docker, CI/CD, backup terjadwal</li>
@@ -347,10 +347,10 @@
   <section id="work"><div class="wrap">
     <div class="sec-cmd reveal"><div class="prompt">ls ~/projects</div><h2>Karya pilihan.</h2></div>
     <div class="work-list">
-      <div class="work-item reveal"><span class="w-id">[01]</span><div><div class="w-title">Project Satu</div><div class="w-meta"># automation · placeholder</div></div><span class="w-arrow">→</span></div>
-      <div class="work-item reveal"><span class="w-id">[02]</span><div><div class="w-title">Project Dua</div><div class="w-meta"># infra · placeholder</div></div><span class="w-arrow">→</span></div>
-      <div class="work-item reveal"><span class="w-id">[03]</span><div><div class="w-title">Project Tiga</div><div class="w-meta"># web app · placeholder</div></div><span class="w-arrow">→</span></div>
-      <div class="work-item reveal"><span class="w-id">[04]</span><div><div class="w-title">Project Empat</div><div class="w-meta"># network · placeholder</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[01]</span><div><div class="w-title">AkhBot — AI Command Center</div><div class="w-meta"># automation · Telegram bot multi-agent untuk monitoring &amp; operasional</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[02]</span><div><div class="w-title">WiFi Roaming &amp; RF Diagnosis</div><div class="w-meta"># network · analisis heatmap multi-AP dan optimasi roaming 802.11k/v/r</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[03]</span><div><div class="w-title">Personal Portfolio Site</div><div class="w-meta"># web app · situs ini sendiri, dibangun dari nol dengan terminal-aesthetic</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[04]</span><div><div class="w-title">Infrastructure Automation</div><div class="w-meta"># infra · server provisioning &amp; monitoring berbasis AI agent</div></div><span class="w-arrow">→</span></div>
     </div>
   </div></section>
 
@@ -370,11 +370,11 @@
     <div class="sec-cmd reveal" style="text-align:center"><div class="prompt">./contact.sh</div></div>
     <div class="reveal">
       <h2>Yuk <span class="accent">ngobrol.</span></h2>
-      <p>Placeholder — ajakan kontak. Punya project atau mau kolaborasi? Kirim pesan aja.</p>
+      <p>Terbuka untuk diskusi seputar network infrastructure, server automation, atau kolaborasi project berbasis AI. Silakan hubungi lewat salah satu kanal berikut.</p>
       <div class="socials">
-        <button class="btn primary">email</button>
-        <button class="btn ghost">linkedin</button>
-        <button class="btn ghost">github</button>
+        <a class="btn primary" href="mailto:fathulihsannn@gmail.com">email</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/fathul-ihsan" target="_blank" rel="noopener">linkedin</a>
+        <a class="btn ghost" href="https://github.com/fathulihsann" target="_blank" rel="noopener">github</a>
       </div>
     </div>
   </div></section>
