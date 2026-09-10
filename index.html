@@ -133,7 +133,12 @@
 
   /* ===== status stats: bento box layout ===== */
   .status-grid{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:auto auto;gap:16px}
-  @media(max-width:720px){.status-grid{grid-template-columns:1fr}}
+  @media(max-width:720px){
+    .status-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+    .status-grid>.stat:nth-child(1){grid-row:1;grid-column:1}
+    .status-grid>.stat:nth-child(2){grid-row:1;grid-column:2}
+    .status-grid>.stat:nth-child(3){grid-row:2;grid-column:1/-1}
+  }
   .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;transition:.3s}
   .stat:hover{border-color:var(--accent);transform:translateY(-3px)}
   .stat.big{grid-row:span 2;display:flex;flex-direction:column;justify-content:center}
@@ -141,6 +146,7 @@
   .stat .lbl::before{content:"●";color:var(--green);font-size:9px}
   .stat .num{font-family:var(--sans);font-size:clamp(36px,6vw,54px);font-weight:700;color:var(--accent);margin-top:10px}
   .stat.big .num{font-size:clamp(48px,8vw,72px)}
+  @media(max-width:720px){.stat.big .num{font-size:clamp(36px,10vw,52px)}}
 
   /* ===== 3 pillars ===== */
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -230,6 +236,7 @@
           pathLength="100" stroke-dasharray="14 86" stroke-dashoffset="0"/>
       </svg>
       <div class="term-bar">
+        <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
         <div class="term-title"><b>fathul@ihsan</b>: ~</div>
         <div class="nav-actions">
           <div class="nav-links">
