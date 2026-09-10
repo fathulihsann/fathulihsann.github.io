@@ -19,13 +19,13 @@
   [data-theme="dark"]{
     --bg:#020203;--bg-deep:#000000;--surface:#111113;--surface-2:#1a1a1d;
     --nav-bg:#131315;--nav-bg-2:#1c1c1f;
-    --ink:#e9eef7;--muted:#9a9a9f;--border:rgba(255,255,255,.09);--grid:rgba(255,255,255,.035);
+    --ink:#e9eef7;--muted:#9a9a9f;--border:rgba(255,255,255,.09);--grid:rgba(255,255,255,.035);--dot:rgba(255,255,255,.16);
     --panel-accent:#111113;
   }
   [data-theme="light"]{
     --bg:#f5f7fa;--bg-deep:#eaeef3;--surface:#ffffff;--surface-2:#f0f3f7;
     --nav-bg:#ffffff;--nav-bg-2:#eef0f3;
-    --ink:#0B192C;--muted:#666b72;--border:rgba(11,25,44,.12);--grid:rgba(11,25,44,.04);
+    --ink:#0B192C;--muted:#666b72;--border:rgba(11,25,44,.12);--grid:rgba(11,25,44,.04);--dot:rgba(11,25,44,.18);
     --panel-accent:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -49,10 +49,10 @@
   /* 2) about: dot-matrix texture, edges fading */
   #about{position:relative}
   #about::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-    background-image:radial-gradient(var(--grid) 1.3px,transparent 1.3px);
+    background-image:radial-gradient(var(--dot) 1.6px,transparent 1.6px);
     background-size:22px 22px;
-    -webkit-mask-image:radial-gradient(70% 90% at 15% 30%, black 0%, transparent 75%);
-    mask-image:radial-gradient(70% 90% at 15% 30%, black 0%, transparent 75%)}
+    -webkit-mask-image:radial-gradient(75% 95% at 15% 30%, black 0%, transparent 80%);
+    mask-image:radial-gradient(75% 95% at 15% 30%, black 0%, transparent 80%)}
 
   /* 3) status/stats: straight grid lines only */
   .status-section{position:relative}
@@ -81,7 +81,7 @@
   .cap-border rect{fill:none;stroke:var(--border);stroke-width:1.5}
   .cap-border .trace{stroke:var(--accent);stroke-width:2;stroke-linecap:round;
     filter:drop-shadow(0 0 4px color-mix(in srgb,var(--accent) 60%,transparent))}
-  .term-bar{position:relative;z-index:3;display:flex;align-items:center;gap:14px;padding:11px 22px}
+  .term-bar{position:relative;z-index:3;display:flex;align-items:center;gap:14px;padding:16px 24px}
   .dots{display:flex;gap:8px}
   .dot{width:11px;height:11px;border-radius:50%}
   .dot.r{background:var(--red)}.dot.y{background:var(--yellow)}.dot.g{background:var(--green)}
