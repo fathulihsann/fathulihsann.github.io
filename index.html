@@ -47,6 +47,15 @@
     mask-image:linear-gradient(to bottom, black 0%, black 30%, transparent 85%)}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* soft organic blobs, confined to top of page, layered under the grid+dot texture */
+  .blobs{position:absolute;top:-120px;left:0;right:0;height:1200px;z-index:-2;overflow:hidden;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;will-change:transform}
+  .blob.a{width:520px;height:520px;top:-140px;left:-80px;background:radial-gradient(circle at 35% 35%,var(--accent),transparent 70%);opacity:.16;animation:blobfloat 22s var(--ease) infinite}
+  .blob.b{width:420px;height:420px;top:40px;right:-100px;background:radial-gradient(circle at 35% 35%,#ffffff,transparent 70%);opacity:.05;animation:blobfloat 26s var(--ease) infinite reverse}
+  .blob.c{width:360px;height:360px;top:520px;left:38%;background:radial-gradient(circle at 35% 35%,var(--accent-2),transparent 70%);opacity:.08;animation:blobfloat 30s var(--ease) infinite}
+  @keyframes blobfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-24px) scale(1.06)}66%{transform:translate(-22px,18px) scale(.96)}}
+  @media(prefers-reduced-motion:reduce){.blob{animation:none}}
   .mono{font-family:var(--mono)}
   .prompt{font-family:var(--mono);color:var(--accent);font-size:14px;letter-spacing:.02em}
   .prompt::before{content:"$ ";color:var(--muted)}
@@ -204,6 +213,7 @@
 </style>
 </head>
 <body>
+  <div class="blobs" aria-hidden="true"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
   <nav>
     <div class="cap">
       <svg class="cap-border" id="capBorder" preserveAspectRatio="none">
