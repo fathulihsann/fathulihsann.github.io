@@ -1,248 +1,277 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fathul Ihsan — Portfolio</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>fathul@portfolio: ~</title>
 <style>
   :root{
-    --bg:#08090d;--bg-2:#0e1016;--ink:#f4f6fc;--muted:#8b93a7;
-    --border:rgba(255,255,255,.08);--accent:#6c5cff;--accent-2:#4be3c0;
+    --accent:#FF6500;--accent-2:#ff8c42;
+    --green:#3fb950;--red:#ff5f56;--yellow:#ffbd2e;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Space Grotesk",system-ui,-apple-system,Segoe UI,sans-serif;
+    --body:"Inter",system-ui,sans-serif;
     --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  [data-theme="dark"]{
+    --bg:#0B192C;--bg-deep:#060f1c;--surface:#0f2137;--surface-2:#132a45;
+    --ink:#e9eef7;--muted:#7d90aa;--border:rgba(255,255,255,.09);--grid:rgba(255,255,255,.03);
+  }
+  [data-theme="light"]{
+    --bg:#f5f7fa;--bg-deep:#eaeef3;--surface:#ffffff;--surface-2:#f0f3f7;
+    --ink:#0B192C;--muted:#5a6b82;--border:rgba(11,25,44,.12);--grid:rgba(11,25,44,.04);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.05}
+  body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.6;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:44px 44px}
   a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+  .prompt{font-family:var(--mono);color:var(--accent);font-size:14px;letter-spacing:.02em}
+  .prompt::before{content:"$ ";color:var(--muted)}
+  h1,h2,h3{font-family:var(--sans);font-weight:600;letter-spacing:-.03em;line-height:1.08}
+  .cursor{display:inline-block;width:.6ch;background:var(--accent);animation:blink 1s steps(1) infinite;margin-left:2px}
+  @keyframes blink{50%{opacity:0}}
 
-  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:var(--accent);transition:width .1s linear}
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:20px 0;transition:.4s}
-  nav.solid{background:rgba(8,9,13,.7);backdrop-filter:blur(16px);padding:14px 0;border-bottom:1px solid var(--border)}
-  .nav-inner{display:flex;justify-content:space-between;align-items:center}
-  .logo{font-weight:700;font-size:19px;letter-spacing:-.03em}.logo b{color:var(--accent)}
-  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
-  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--ink)}
-  @media(max-width:640px){.nav-links{display:none}}
+  /* ===== terminal header nav ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:150;background:var(--surface);
+    border-bottom:1px solid var(--border);transition:background .4s}
+  .term-bar{display:flex;align-items:center;gap:14px;padding:10px 18px;max-width:1400px;margin:0 auto}
+  .dots{display:flex;gap:8px}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .dot.r{background:var(--red)}.dot.y{background:var(--yellow)}.dot.g{background:var(--green)}
+  .term-title{font-family:var(--mono);font-size:13px;color:var(--muted);flex:1;text-align:center}
+  .term-title b{color:var(--ink)}
+  .nav-actions{display:flex;align-items:center;gap:18px}
+  .nav-links{display:flex;gap:18px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  @media(max-width:720px){.nav-links{display:none}}
+  .theme-btn{font-family:var(--mono);font-size:12px;background:var(--surface-2);border:1px solid var(--border);
+    color:var(--ink);padding:6px 12px;border-radius:7px;cursor:pointer;transition:.25s}
+  .theme-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-  /* EFFECT 1: pinned hero + headshot */
-  .hero-pin{height:200vh;position:relative}
-  .hero-sticky{position:sticky;top:0;height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-  .hero-bg{position:absolute;inset:0;z-index:0;
-    background:radial-gradient(900px 600px at 50% 25%,rgba(108,92,255,.22),transparent 60%),
-    radial-gradient(700px 500px at 80% 80%,rgba(75,227,192,.14),transparent 55%)}
-  .hero-content{position:relative;z-index:2;padding:0 28px;will-change:transform,opacity}
-  .hero-photo{width:clamp(96px,14vw,132px);height:clamp(96px,14vw,132px);border-radius:50%;
-    object-fit:cover;margin:0 auto 28px;border:2px solid var(--border);
-    box-shadow:0 0 0 6px rgba(108,92,255,.14),0 20px 50px rgba(0,0,0,.6)}
-  .hero-eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-2);margin-bottom:20px}
-  .hero-content h1{font-size:clamp(44px,9vw,120px);letter-spacing:-.04em}
-  .hero-content h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero-content p{color:var(--muted);font-size:clamp(15px,2.4vw,20px);max-width:520px;margin:26px auto 0}
-  .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;
-    font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:bob 2s var(--ease) infinite}
-  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
-  /* decorative SVG blobs */
-  .deco{position:absolute;z-index:1;opacity:.5;pointer-events:none;filter:blur(2px)}
-  .deco.d1{top:14%;left:8%;width:120px;animation:spin 26s linear infinite}
-  .deco.d2{bottom:16%;right:10%;width:90px;animation:spin 34s linear infinite reverse}
-  @keyframes spin{to{transform:rotate(360deg)}}
+  section{padding:100px 0}
+  .sec-cmd{margin-bottom:34px}
+  .sec-cmd h2{font-size:clamp(26px,5vw,42px);margin-top:10px}
 
-  .statement{padding:34vh 0}
-  .big-line{font-size:clamp(30px,6vw,66px);font-weight:600;letter-spacing:-.03em;line-height:1.15;max-width:15ch}
-  .big-line .w{display:inline-block;opacity:.12;transition:opacity .5s var(--ease),transform .5s var(--ease);transform:translateY(.15em)}
-  .big-line .w.lit{opacity:1;transform:none}
-  .big-line .accent{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  /* ===== hero ===== */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:60px}
+  .hero-inner{width:100%}
+  .hero .prompt{font-size:15px;margin-bottom:18px}
+  .hero h1{font-size:clamp(40px,8vw,88px);margin-bottom:10px}
+  .hero h1 .accent{color:var(--accent)}
+  .hero .roles{font-family:var(--mono);font-size:clamp(16px,3vw,24px);color:var(--muted);margin:18px 0 26px}
+  .hero .roles span{color:var(--ink)}
+  .hero .roles .sep{color:var(--accent);margin:0 10px}
+  .hero .tagline{color:var(--muted);max-width:540px;font-size:17px}
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:9px;cursor:pointer;border:1px solid var(--border);transition:.25s}
+  .btn.primary{background:var(--accent);color:#0B192C;border-color:var(--accent);font-weight:600}
+  .btn.primary:hover{background:var(--accent-2)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
 
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:60px 0}
-  @media(max-width:700px){.stats{grid-template-columns:1fr}}
-  .stat{padding:34px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.03),transparent)}
-  .stat .num{font-size:clamp(40px,6vw,64px);font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .stat .lbl{color:var(--muted);font-size:14px;margin-top:8px}
+  /* ===== console panel (about/status) ===== */
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .panel-head{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--border);
+    font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--surface-2)}
+  .panel-head .dots{margin-right:6px}
+  .panel-head .dot{width:10px;height:10px}
+  .panel-body{padding:24px}
+  .panel-body p{color:var(--muted);margin-bottom:12px;max-width:66ch}
+  .panel-body .out{font-family:var(--mono);font-size:13px;color:var(--ink)}
+  .panel-body .cm{color:var(--muted)}
 
-  /* about with photo */
-  .about{padding:12vh 0}
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:32px}}
-  .about-photo{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border)}
-  .about-photo img{width:100%;height:clamp(320px,44vh,460px);object-fit:cover;transition:transform 1.2s var(--ease)}
-  .about-photo:hover img{transform:scale(1.05)}
-  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 40%,rgba(8,9,13,.5))}
-  .about-txt .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-  .about-txt h2{font-size:clamp(28px,5vw,46px);margin:12px 0 18px}
-  .about-txt p{color:var(--muted);font-size:16px;margin-bottom:14px;max-width:52ch}
+  /* ===== status stats ===== */
+  .status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:720px){.status-grid{grid-template-columns:1fr}}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px}
+  .stat .lbl{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .stat .lbl::before{content:"●";color:var(--green);font-size:9px}
+  .stat .num{font-family:var(--sans);font-size:clamp(36px,6vw,54px);font-weight:700;color:var(--accent);margin-top:10px}
 
-  /* EFFECT 4: horizontal scroll with photo cards */
-  .horiz-pin{height:360vh;position:relative}
-  .horiz-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
-  .horiz-track{display:flex;gap:28px;padding:0 28px;will-change:transform}
-  .h-card{flex:0 0 clamp(280px,42vw,440px);height:64vh;border-radius:24px;overflow:hidden;
-    border:1px solid var(--border);position:relative;display:flex;flex-direction:column;justify-content:flex-end}
-  .h-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform 1s var(--ease)}
-  .h-card:hover img{transform:scale(1.06)}
-  .h-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,9,13,.1) 30%,rgba(8,9,13,.92))}
-  .h-card .body{position:relative;z-index:2;padding:34px}
-  .h-card .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
-  .h-card h3{font-size:clamp(22px,3.5vw,32px);margin:12px 0 10px}
-  .h-card p{color:#c8cee0;font-size:15px;max-width:34ch}
-  .horiz-head{position:absolute;top:12vh;left:28px;z-index:5}
-  .horiz-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-  .horiz-head h2{font-size:clamp(26px,4vw,40px);margin-top:8px}
+  /* ===== 3 pillars ===== */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:820px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:30px;transition:.3s;position:relative;overflow:hidden}
+  .pillar:hover{border-color:var(--accent);transform:translateY(-4px)}
+  .pillar:hover .ic{color:var(--accent)}
+  .pillar .ic{width:52px;height:52px;color:var(--muted);transition:color .3s;margin-bottom:18px}
+  .pillar .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .pillar h3{font-size:23px;margin:8px 0 12px}
+  .pillar p{color:var(--muted);font-size:15px}
 
-  /* EFFECT 5: stacking cards */
-  .stack{padding:80px 0 40px}
-  .stack-head{margin-bottom:40px}
-  .stack-head .num{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-  .stack-head h2{font-size:clamp(28px,5vw,48px);margin-top:10px}
-  .stack-item{position:sticky;top:14vh;margin-bottom:40px}
-  .stack-card{border:1px solid var(--border);border-radius:24px;padding:clamp(30px,5vw,56px);
-    background:var(--bg-2);box-shadow:0 -20px 60px rgba(0,0,0,.5);display:flex;gap:28px;align-items:center}
-  @media(max-width:700px){.stack-card{flex-direction:column;align-items:flex-start}}
-  .stack-card .ic{flex:0 0 64px;width:64px;height:64px;border-radius:16px;display:grid;place-items:center;
-    background:linear-gradient(145deg,rgba(108,92,255,.2),rgba(75,227,192,.12));border:1px solid var(--border)}
-  .stack-card .k{font-size:14px;color:var(--accent-2);letter-spacing:.1em;text-transform:uppercase}
-  .stack-card h3{font-size:clamp(22px,4vw,36px);margin:12px 0 12px}
-  .stack-card p{color:var(--muted);max-width:60ch;font-size:16px}
+  /* ===== work list ===== */
+  .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;
+    padding:22px 4px;border-bottom:1px solid var(--border);transition:.25s;cursor:pointer}
+  .work-item:hover{padding-left:14px;background:var(--surface)}
+  .work-item:hover .w-title{color:var(--accent)}
+  .w-id{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .w-title{font-family:var(--sans);font-size:clamp(18px,3vw,26px);font-weight:600;transition:color .25s}
+  .w-meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .w-arrow{font-family:var(--mono);color:var(--accent)}
 
-  .reveal{opacity:0;transform:translateY(48px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
+  /* ===== skills ===== */
+  .skills{display:flex;flex-wrap:wrap;gap:10px}
+  .skill{font-family:var(--mono);font-size:13px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;
+    color:var(--muted);background:var(--surface);transition:.25s}
+  .skill:hover{border-color:var(--accent);color:var(--accent)}
 
-  .marquee{padding:120px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .marquee-inner{display:inline-block;font-size:clamp(50px,12vw,140px);font-weight:700;letter-spacing:-.04em;
-    color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);will-change:transform}
-  .marquee-inner .fill{-webkit-text-stroke:0;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-
-  .contact{padding:16vh 0;text-align:center}
-  .contact h2{font-size:clamp(40px,9vw,110px);letter-spacing:-.04em}
-  .contact h2 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .contact p{color:var(--muted);margin:24px auto 40px;max-width:440px}
+  /* ===== contact ===== */
+  .contact{text-align:center}
+  .contact h2{font-size:clamp(32px,7vw,64px);margin:14px 0 8px}
+  .contact .accent{color:var(--accent)}
+  .contact p{color:var(--muted);max-width:440px;margin:0 auto 30px}
   .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{padding:15px 30px;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:transform .3s var(--ease)}
-  .btn.primary{color:#08090d;background:linear-gradient(120deg,var(--accent),var(--accent-2))}
-  .btn.ghost{color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--border)}
-  .btn:hover{transform:translateY(-4px)}
-  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+  footer{border-top:1px solid var(--border);padding:26px 0}
+  footer .line{font-family:var(--mono);font-size:13px;color:var(--muted)}
 
-  @media(prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.big-line .w{opacity:1;transform:none}
-    .deco{animation:none}
-  }
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.cursor{animation:none}}
 </style>
 </head>
 <body>
   <div id="progress"></div>
-  <nav id="nav"><div class="wrap nav-inner">
-    <div class="logo">Fathul<b>.</b></div>
-    <div class="nav-links"><a href="#work">Work</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
-  </div></nav>
 
-  <!-- EFFECT 1: hero + headshot + SVG deco -->
-  <div class="hero-pin"><div class="hero-sticky">
-    <div class="hero-bg"></div>
-    <svg class="deco d1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="url(#g1)" stroke-width="2" stroke-dasharray="6 10"/><defs><linearGradient id="g1"><stop offset="0" stop-color="#6c5cff"/><stop offset="1" stop-color="#4be3c0"/></linearGradient></defs></svg>
-    <svg class="deco d2" viewBox="0 0 100 100"><rect x="14" y="14" width="72" height="72" rx="18" fill="none" stroke="url(#g1)" stroke-width="2"/></svg>
-    <div class="hero-content" id="heroContent">
-      <img class="hero-photo" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop" alt="Foto profil (sample)" loading="eager"/>
-      <div class="hero-eyebrow">Network &amp; Infra Engineer</div>
-      <h1>Bikin sistem<br/>yang <span class="grad">jalan sendiri.</span></h1>
-      <p>Placeholder — tagline singkat antum. Ganti dengan kalimat yang nendang soal apa yang antum kerjain.</p>
+  <nav>
+    <div class="term-bar">
+      <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+      <div class="term-title"><b>fathul@portfolio</b>: ~</div>
+      <div class="nav-actions">
+        <div class="nav-links">
+          <a href="#about">about</a><a href="#pillars">stack</a><a href="#work">work</a><a href="#contact">contact</a>
+        </div>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">☾ dark</button>
+      </div>
     </div>
-    <div class="scroll-hint">Scroll ↓</div>
-  </div></div>
+  </nav>
 
-  <!-- EFFECT 2: word reveal -->
-  <section class="statement wrap">
-    <p class="big-line" data-reveal-words>Ane bantu bisnis <span class="accent">otomatisin</span> infrastruktur biar tim fokus ke hal yang <span class="accent">beneran penting.</span></p>
-  </section>
+  <!-- HERO -->
+  <header class="hero"><div class="wrap hero-inner">
+    <div class="prompt">whoami</div>
+    <h1><span id="typed"></span><span class="cursor">&nbsp;</span></h1>
+    <div class="roles">
+      <span>Network</span><span class="sep">·</span><span>Server</span><span class="sep">·</span><span>AI</span>
+    </div>
+    <p class="tagline">Placeholder — tagline singkat antum. Contoh: "Ngurusin jaringan, server, dan bikin sistem otomatis biar semuanya jalan sendiri."</p>
+    <div class="hero-cta">
+      <button class="btn primary" onclick="document.getElementById('work').scrollIntoView()">./view_work.sh</button>
+      <button class="btn ghost" onclick="document.getElementById('contact').scrollIntoView()">./contact.sh</button>
+    </div>
+  </div></header>
 
-  <!-- EFFECT 3: counters -->
-  <section class="wrap"><div class="stats">
-    <div class="stat reveal"><div class="num" data-count="5">0</div><div class="lbl">Tahun pengalaman</div></div>
-    <div class="stat reveal"><div class="num" data-count="20" data-suffix="+">0</div><div class="lbl">Project selesai</div></div>
-    <div class="stat reveal"><div class="num" data-count="99" data-suffix="%">0</div><div class="lbl">Uptime rata-rata</div></div>
+  <!-- ABOUT -->
+  <section id="about"><div class="wrap">
+    <div class="sec-cmd reveal"><div class="prompt">cat about.md</div></div>
+    <div class="panel reveal">
+      <div class="panel-head"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>about.md</div>
+      <div class="panel-body">
+        <p>Placeholder — latar belakang antum: mulai dari mana, sekarang fokus di apa (network, server, AI), dan hal yang paling antum nikmati.</p>
+        <p>Paragraf kedua: gaya kerja, nilai yang antum pegang, atau pencapaian yang dibanggakan. Ganti semua dengan cerita asli.</p>
+        <p class="out"><span class="cm"># status:</span> <span style="color:var(--green)">● available for work</span></p>
+      </div>
+    </div>
   </div></section>
 
-  <!-- about with photo -->
-  <section class="about wrap" id="about"><div class="about-grid">
-    <div class="about-photo reveal"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop" alt="About (sample)"/></div>
-    <div class="about-txt reveal">
-      <div class="num">01 — About</div>
-      <h2>Sedikit tentang ane.</h2>
-      <p>Placeholder — latar belakang antum: mulai dari mana, sekarang fokus di apa, dan hal yang paling antum nikmati dari pekerjaan.</p>
-      <p>Paragraf kedua: gaya kerja, nilai yang antum pegang, atau pencapaian yang dibanggakan. Ganti semua dengan cerita asli.</p>
+  <!-- STATUS / STATS -->
+  <section><div class="wrap">
+    <div class="sec-cmd reveal"><div class="prompt">systemctl status career</div></div>
+    <div class="status-grid">
+      <div class="stat reveal"><div class="lbl">uptime.years</div><div class="num" data-count="5">0</div></div>
+      <div class="stat reveal"><div class="lbl">projects.done</div><div class="num" data-count="20" data-suffix="+">0</div></div>
+      <div class="stat reveal"><div class="lbl">avg.uptime</div><div class="num" data-count="99" data-suffix="%">0</div></div>
     </div>
   </div></section>
 
-  <!-- EFFECT 4: horizontal work gallery with photos -->
-  <div class="horiz-pin" id="work"><div class="horiz-sticky">
-    <div class="horiz-head"><div class="num">02 — Work</div><h2>Karya pilihan.</h2></div>
-    <div class="horiz-track" id="horizTrack">
-      <div class="h-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80&auto=format&fit=crop" alt=""/><div class="body"><span class="tag">Automation</span><h3>Project Satu</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
-      <div class="h-card"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format&fit=crop" alt=""/><div class="body"><span class="tag">Infra</span><h3>Project Dua</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
-      <div class="h-card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop" alt=""/><div class="body"><span class="tag">Web App</span><h3>Project Tiga</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
-      <div class="h-card"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80&auto=format&fit=crop" alt=""/><div class="body"><span class="tag">Network</span><h3>Project Empat</h3><p>Deskripsi placeholder — masalahnya apa, antum bangun apa, hasilnya gimana.</p></div></div>
+  <!-- 3 PILLARS -->
+  <section id="pillars"><div class="wrap">
+    <div class="sec-cmd reveal"><div class="prompt">ls -l ~/stack</div><h2>Tiga bidang yang ane geluti.</h2></div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="30" width="36" height="10" rx="2"/><circle cx="12" cy="35" r="1.5" fill="currentColor"/><circle cx="17" cy="35" r="1.5" fill="currentColor"/><path d="M24 30V18M14 18h20M14 18v-4M34 18v-4M10 10h8v4h-8zM30 10h8v4h-8z"/></svg>
+        <div class="tag">[01] network</div><h3>Network Engineering</h3>
+        <p>Placeholder — routing, switching, WiFi/RF planning, roaming (802.11k/v/r), desain topology & troubleshoot.</p>
+      </div>
+      <div class="pillar reveal">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="7" width="30" height="10" rx="2"/><rect x="9" y="19" width="30" height="10" rx="2"/><rect x="9" y="31" width="30" height="10" rx="2"/><circle cx="14" cy="12" r="1.3" fill="currentColor"/><circle cx="14" cy="24" r="1.3" fill="currentColor"/><circle cx="14" cy="36" r="1.3" fill="currentColor"/></svg>
+        <div class="tag">[02] server</div><h3>Server &amp; Automation</h3>
+        <p>Placeholder — Linux server, monitoring, CI/CD, Docker, automasi task berulang biar hemat waktu tim.</p>
+      </div>
+      <div class="pillar reveal">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="5"/><circle cx="10" cy="12" r="3"/><circle cx="38" cy="12" r="3"/><circle cx="10" cy="36" r="3"/><circle cx="38" cy="36" r="3"/><path d="M20 21l-8-6M28 21l8-6M20 27l-8 6M28 27l8 6"/></svg>
+        <div class="tag">[03] ai</div><h3>AI Enthusiast</h3>
+        <p>Placeholder — AI agents, automasi berbasis LLM, integrasi model ke workflow sehari-hari.</p>
+      </div>
     </div>
-  </div></div>
-
-  <!-- EFFECT 5: stacking service cards -->
-  <section class="stack wrap" id="services">
-    <div class="stack-head reveal"><div class="num">03 — Services</div><h2>Yang bisa ane kerjain.</h2></div>
-    <div class="stack-item"><div class="stack-card"><div class="ic">📡</div><div><div class="k">Layanan 01</div><h3>Network &amp; RF Planning</h3><p>Placeholder — desain coverage WiFi multi-AP, channel plan, roaming (802.11k/v/r), troubleshoot dead zone.</p></div></div></div>
-    <div class="stack-item"><div class="stack-card"><div class="ic">⚙️</div><div><div class="k">Layanan 02</div><h3>Server &amp; Automation</h3><p>Placeholder — setup server, monitoring, CI/CD, automasi task berulang biar hemat waktu tim.</p></div></div></div>
-    <div class="stack-item"><div class="stack-card"><div class="ic">💻</div><div><div class="k">Layanan 03</div><h3>Web Development</h3><p>Placeholder — bikin aplikasi web (Laravel + React) dari nol sampai deploy.</p></div></div></div>
-  </section>
-
-  <div class="marquee"><div class="marquee-inner" id="marquee">Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;Let's build&nbsp;<span class="fill">something&nbsp;</span>together&nbsp;·&nbsp;</div></div>
-
-  <section class="contact wrap" id="contact"><div class="reveal">
-    <h2>Yuk <span class="grad">ngobrol.</span></h2>
-    <p>Placeholder — ajakan kontak. Punya project atau mau kolaborasi? Kirim pesan aja.</p>
-    <div class="socials"><button class="btn primary">Email</button><button class="btn ghost">LinkedIn</button><button class="btn ghost">GitHub</button></div>
   </div></section>
 
-  <footer>© <span id="yr"></span> Fathul Ihsan — Foto: sample dari Unsplash. Ganti footer ini.</footer>
+  <!-- WORK -->
+  <section id="work"><div class="wrap">
+    <div class="sec-cmd reveal"><div class="prompt">ls ~/projects</div><h2>Karya pilihan.</h2></div>
+    <div class="work-list">
+      <div class="work-item reveal"><span class="w-id">[01]</span><div><div class="w-title">Project Satu</div><div class="w-meta"># automation · placeholder</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[02]</span><div><div class="w-title">Project Dua</div><div class="w-meta"># infra · placeholder</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[03]</span><div><div class="w-title">Project Tiga</div><div class="w-meta"># web app · placeholder</div></div><span class="w-arrow">→</span></div>
+      <div class="work-item reveal"><span class="w-id">[04]</span><div><div class="w-title">Project Empat</div><div class="w-meta"># network · placeholder</div></div><span class="w-arrow">→</span></div>
+    </div>
+  </div></section>
+
+  <!-- SKILLS -->
+  <section><div class="wrap">
+    <div class="sec-cmd reveal"><div class="prompt">ls skills/</div></div>
+    <div class="skills reveal">
+      <span class="skill">MikroTik</span><span class="skill">Cisco</span><span class="skill">Linux</span>
+      <span class="skill">Docker</span><span class="skill">CI/CD</span><span class="skill">Laravel</span>
+      <span class="skill">React</span><span class="skill">Python</span><span class="skill">Monitoring</span>
+      <span class="skill">WiFi/RF</span><span class="skill">AI Agents</span><span class="skill">Automation</span>
+    </div>
+  </div></section>
+
+  <!-- CONTACT -->
+  <section id="contact"><div class="wrap contact">
+    <div class="sec-cmd reveal" style="text-align:center"><div class="prompt">./contact.sh</div></div>
+    <div class="reveal">
+      <h2>Yuk <span class="accent">ngobrol.</span></h2>
+      <p>Placeholder — ajakan kontak. Punya project atau mau kolaborasi? Kirim pesan aja.</p>
+      <div class="socials">
+        <button class="btn primary">email</button>
+        <button class="btn ghost">linkedin</button>
+        <button class="btn ghost">github</button>
+      </div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><div class="line">connection closed. © <span id="yr"></span> Fathul Ihsan — built in the terminal.</div></div></footer>
 
 <script>
   document.getElementById('yr').textContent=new Date().getFullYear();
-  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  document.querySelectorAll('[data-reveal-words]').forEach(el=>{
-    [...el.childNodes].forEach(c=>{
-      if(c.nodeType===3){const f=document.createDocumentFragment();
-        c.textContent.split(/(\s+)/).forEach(t=>{if(t.trim()){const s=document.createElement('span');s.className='w';s.textContent=t;f.appendChild(s);}else f.appendChild(document.createTextNode(t));});
-        c.replaceWith(f);}
-      else if(c.nodeType===1){c.classList.add('w');}
-    });
-  });
-  const nav=document.getElementById('nav'),hero=document.getElementById('heroContent'),heroPin=document.querySelector('.hero-pin'),
-    track=document.getElementById('horizTrack'),horizPin=document.querySelector('.horiz-pin'),marquee=document.getElementById('marquee'),
-    progress=document.getElementById('progress'),words=[...document.querySelectorAll('.big-line')];
-  function onScroll(){
-    const y=scrollY,vh=innerHeight,max=document.documentElement.scrollHeight-vh;
-    progress.style.width=(y/max*100)+'%';
-    nav.classList.toggle('solid',y>60);
-    const hp=heroPin.getBoundingClientRect();
-    const hProg=clamp(-hp.top/(heroPin.offsetHeight-vh),0,1);
-    hero.style.transform=`scale(${1-hProg*0.25}) translateY(${hProg*-40}px)`;hero.style.opacity=String(1-hProg*1.1);
-    const zp=horizPin.getBoundingClientRect();
-    const zProg=clamp(-zp.top/(horizPin.offsetHeight-vh),0,1);
-    track.style.transform=`translateX(${-(track.scrollWidth-innerWidth+56)*zProg}px)`;
-    marquee.style.transform=`translateX(${-(y*0.08)%50-10}%)`;
-    words.forEach(line=>{const r=line.getBoundingClientRect(),ws=[...line.querySelectorAll('.w')];
-      const p=clamp((vh*0.85-r.top)/(vh*0.5),0,1),lit=Math.round(p*ws.length);
-      ws.forEach((w,i)=>w.classList.toggle('lit',i<lit));});
-  }
-  addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});
-  addEventListener('resize',onScroll);onScroll();
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.2});
+
+  // theme
+  const root=document.documentElement, tb=document.getElementById('themeBtn');
+  function setTheme(t){root.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☾ dark':'☀ light';localStorage.setItem('theme',t);}
+  function toggleTheme(){setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');}
+  setTheme(localStorage.getItem('theme')|| (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+
+  // typewriter hero
+  const name="Fathul Ihsan", el=document.getElementById('typed');
+  let i=0;(function type(){if(i<=name.length){el.textContent=name.slice(0,i++);setTimeout(type,90);}})();
+
+  // progress + reveal
+  const progress=document.getElementById('progress');
+  addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;progress.style.width=(scrollY/m*100)+'%';},{passive:true});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // counters
   const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;
     const el=e.target,t=+el.dataset.count,suf=el.dataset.suffix||'';let n=0,step=t/45;
-    const tick=()=>{n+=step;if(n>=t){el.textContent=t+suf;}else{el.textContent=Math.floor(n)+suf;requestAnimationFrame(tick);}};tick();cio.unobserve(el);}),{threshold:.6});
+    (function tick(){n+=step;if(n>=t)el.textContent=t+suf;else{el.textContent=Math.floor(n)+suf;requestAnimationFrame(tick);}})();cio.unobserve(el);}),{threshold:.6});
   document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
 </script>
 </body>
