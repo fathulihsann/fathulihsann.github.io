@@ -63,6 +63,11 @@
   .cap-border .trace{stroke:var(--accent);stroke-width:2;stroke-linecap:round;
     filter:drop-shadow(0 0 4px color-mix(in srgb,var(--accent) 60%,transparent))}
   .term-bar{position:relative;z-index:3;display:flex;align-items:center;gap:14px;padding:16px 24px}
+  .nav-avatar{width:32px;height:32px;border-radius:8px;overflow:hidden;flex:0 0 auto;position:relative;
+    border:1px solid var(--border);will-change:width,opacity,transform}
+  .nav-avatar img{width:100%;height:100%;object-fit:cover;
+    filter:grayscale(1) contrast(1.05);mix-blend-mode:luminosity}
+  .nav-avatar .tint{position:absolute;inset:0;background:linear-gradient(155deg,rgba(255,101,0,.5),transparent 60%);mix-blend-mode:overlay}
   .dots{display:flex;gap:8px}
   .dot{width:11px;height:11px;border-radius:50%}
   .dot.r{background:var(--red)}.dot.y{background:var(--yellow)}.dot.g{background:var(--green)}
@@ -252,6 +257,7 @@
       </svg>
       <div class="term-bar">
         <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+        <div class="nav-avatar" id="navAvatar"><img src="profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&auto=format&fit=crop'" alt="Fathul Ihsan"/><div class="tint"></div></div>
         <div class="term-title"><b>fathul@ihsan</b>: ~</div>
         <div class="nav-actions">
           <div class="nav-links">
@@ -480,11 +486,20 @@
   }
   sizeCap(); addEventListener('resize',sizeCap);
 
+  const navAvatar=document.getElementById('navAvatar');
   addEventListener('scroll',()=>{
     const m=document.documentElement.scrollHeight-innerHeight;
     const p=m>0?scrollY/m:0;
     // travel the glowing dash segment around the full perimeter as user scrolls
     capTrace.style.strokeDashoffset=String(-(p*100));
+    // nav avatar fades + shrinks gradually over first 260px of scroll
+    if(navAvatar){
+      const f=Math.max(0,Math.min(1,scrollY/260)); // 0 at top -> 1 after 260px
+      navAvatar.style.opacity=String(1-f);
+      navAvatar.style.width=(32*(1-f))+'px';
+      navAvatar.style.transform='scale('+(1-f*0.4)+')';
+      navAvatar.style.marginRight=(f>=1)?'-14px':'0'; // collapse the gap when gone
+    }
   },{passive:true});
 
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.18});
