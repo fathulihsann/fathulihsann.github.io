@@ -83,9 +83,7 @@
 
   /* ===== hero (Andreas-style: left-aligned narrative headline) ===== */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:60px}
-  .hero-inner{width:100%;text-align:left;display:grid;grid-template-columns:1.7fr .7fr;gap:44px;align-items:center}
-  @media(max-width:820px){.hero-inner{grid-template-columns:1fr;gap:28px}.hero-photo-wrap{order:-1;max-width:190px}}
-  .hero-photo-wrap{max-width:240px}
+  .hero-inner{width:100%;text-align:left}
   .hero .prompt{font-size:15px;margin-bottom:22px}
   .hero .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .hero .kicker b{color:var(--ink);font-weight:600}
@@ -277,11 +275,6 @@
       <button class="btn primary" onclick="document.getElementById('work').scrollIntoView()">./view_work.sh</button>
       <a class="btn ghost" href="CV-Fathul-Ihsan.pdf" download>./resume.pdf ↓</a>
     </div>
-    </div>
-    <div class="hero-photo-wrap reveal">
-      <img class="hero-photo" src="profile.jpg" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop'" alt="Foto profil Fathul Ihsan"/>
-      <div class="hero-photo-tint"></div>
-      <div class="hero-photo-scan"></div>
     </div>
   </div></header>
 
