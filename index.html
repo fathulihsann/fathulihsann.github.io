@@ -84,6 +84,7 @@
   .theme-btn svg{width:18px;height:18px}
 
   section{padding:100px 0}
+  .status-section{padding:50px 0}
   .sec-cmd{margin-bottom:34px}
   .sec-cmd h2{font-size:clamp(26px,5vw,42px);margin-top:10px}
 
@@ -185,22 +186,14 @@
   .about-photo-scan{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.35;
     background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.18) 2px 3px)}
 
-  /* ===== status stats: bento box layout ===== */
-  .status-grid{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:auto auto;gap:16px}
-  @media(max-width:720px){
-    .status-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
-    .status-grid>.stat:nth-child(1){grid-row:1;grid-column:1}
-    .status-grid>.stat:nth-child(2){grid-row:1;grid-column:2}
-    .status-grid>.stat:nth-child(3){grid-row:2;grid-column:1/-1}
-  }
+  /* ===== status stats: simple 2-card row ===== */
+  .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.status-grid{grid-template-columns:1fr}}
   .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;transition:.3s}
   .stat:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .stat.big{grid-row:span 2;display:flex;flex-direction:column;justify-content:center}
   .stat .lbl{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
   .stat .lbl::before{content:"●";color:var(--green);font-size:9px}
   .stat .num{font-family:var(--sans);font-size:clamp(36px,6vw,54px);font-weight:700;color:var(--accent);margin-top:10px}
-  .stat.big .num{font-size:clamp(48px,8vw,72px)}
-  @media(max-width:720px){.stat.big .num{font-size:clamp(36px,10vw,52px)}}
 
   /* ===== 3 pillars ===== */
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -338,9 +331,8 @@
   <section class="status-section"><div class="wrap">
     <div class="sec-cmd reveal"><div class="prompt">systemctl status career</div></div>
     <div class="status-grid">
-      <div class="stat big reveal"><div class="lbl">uptime.years</div><div class="num" data-count="5" data-suffix="+">0</div></div>
+      <div class="stat reveal"><div class="lbl">uptime.years</div><div class="num" data-count="5" data-suffix="+">0</div></div>
       <div class="stat reveal"><div class="lbl">projects.done</div><div class="num" data-count="20" data-suffix="+">0</div></div>
-      <div class="stat reveal"><div class="lbl">avg.uptime</div><div class="num" data-count="99" data-suffix="%">0</div></div>
     </div>
   </div></section>
 
