@@ -89,14 +89,18 @@
 
   /* ===== hero (Andreas-style: left-aligned narrative headline) ===== */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:60px}
-  .hero-inner{width:100%;text-align:left}
-  /* hero layout: text + transparent-cutout photo side by side (desktop/tablet only) */
-  .hero-flex{display:flex;align-items:center;gap:32px;justify-content:space-between}
-  .hero-pic{display:none;flex:0 0 auto;max-width:200px;align-self:flex-end}
+  .hero-inner{width:100%;text-align:left;position:relative}
+  /* hero layout: text + transparent-cutout photo, photo can overlap text (desktop/tablet only) */
+  .hero-flex{position:relative}
+  .hero-pic{display:none;position:absolute;right:-20px;bottom:-40px;z-index:0;
+    width:280px;pointer-events:none}
   .hero-pic img{display:block;width:100%;height:auto;object-fit:contain;
+    -webkit-mask-image:linear-gradient(to bottom,#000 65%,transparent 96%);
+    mask-image:linear-gradient(to bottom,#000 65%,transparent 96%);
     filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
-  @media(min-width:720px){.hero-pic{display:block}}
-  @media(min-width:1024px){.hero-pic{max-width:280px}}
+  .hero-text{position:relative;z-index:1}
+  @media(min-width:1024px){.hero-pic{display:block;width:380px}}
+  @media(min-width:1280px){.hero-pic{width:460px;right:-10px}}
   /* hero photo fills the space above the prompt */
   .hero-photo-top{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);
     background:var(--surface);box-shadow:0 20px 60px rgba(0,0,0,.35);
