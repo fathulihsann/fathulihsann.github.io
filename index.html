@@ -214,8 +214,10 @@
   .pillar p{color:var(--muted);font-size:15px}
 
   /* ===== feature block: network topology + server monitor ===== */
-  .feature{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:24px}
-  @media(max-width:860px){.feature{grid-template-columns:1fr}}
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;margin-top:56px}
+  .feature + .feature{margin-top:64px}
+  @media(max-width:860px){.feature{grid-template-columns:1fr;gap:28px;margin-top:48px}
+    .feature + .feature{margin-top:56px}}
   .feature.rev{direction:rtl}.feature.rev>*{direction:ltr}
   .feat-text{align-self:center}
   .feat-text .tag{font-family:var(--mono);font-size:12px;color:var(--accent)}
