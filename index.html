@@ -94,7 +94,9 @@
   /* hero layout: text + transparent-cutout photo, photo overlaps text for a layered look (desktop/tablet only) */
   .hero-flex{position:relative}
   .hero-pic{display:none;position:absolute;right:0;top:-30px;z-index:0;
-    width:280px;pointer-events:none}
+    width:280px;pointer-events:none;opacity:0;transform:translateY(24px) scale(.97);
+    transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .hero-pic.in{opacity:1;transform:none}
   .hero-pic{overflow:hidden}
   .hero-pic img{display:block;width:100%;height:auto;object-fit:contain;
     -webkit-mask-image:linear-gradient(to bottom,#000 65%,transparent 96%);
@@ -500,6 +502,10 @@
   const words=[...heroHead.querySelectorAll('.hw')];
   words.forEach(w=>{w.style.opacity='0';w.style.transform='translateY(.25em)';w.style.display='inline-block';w.style.transition='opacity .5s var(--ease),transform .5s var(--ease)';});
   words.forEach((w,i)=>setTimeout(()=>{w.style.opacity='1';w.style.transform='none';},220+i*55));
+
+  // hero photo: fade + slide in shortly after headline starts revealing
+  const heroPic=document.querySelector('.hero-pic');
+  if(heroPic){ setTimeout(()=>heroPic.classList.add('in'), 350); }
 
   // capsule nav: size the border-tracer rects to match the pill, animate dash offset with scroll
   const capBg=document.getElementById('capRectBg'), capTrace=document.getElementById('capRectTrace'),
