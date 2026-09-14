@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>fathul@ihsan: ~</title>
+<title>Fathul Ihsan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -95,10 +95,13 @@
   .hero-flex{position:relative}
   .hero-pic{display:none;position:absolute;right:0;top:-30px;z-index:0;
     width:280px;pointer-events:none}
+  .hero-pic{overflow:hidden}
   .hero-pic img{display:block;width:100%;height:auto;object-fit:contain;
     -webkit-mask-image:linear-gradient(to bottom,#000 65%,transparent 96%);
     mask-image:linear-gradient(to bottom,#000 65%,transparent 96%);
     filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+  .hero-pic::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to bottom,transparent 0%,transparent 35%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.85) 85%,var(--bg) 100%)}
   .hero-text{position:relative;z-index:2}
   .hero-text h1{text-shadow:0 2px 4px rgba(0,0,0,.55),0 10px 34px rgba(0,0,0,.6)}
   [data-theme="light"] .hero-text h1{text-shadow:0 2px 6px rgba(255,255,255,.85),0 10px 30px rgba(255,255,255,.7)}
