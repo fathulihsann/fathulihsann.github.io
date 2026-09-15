@@ -764,6 +764,23 @@ main {
 
 .clients-item img:hover { filter: grayscale(0); }
 
+.certificates .clients-item {
+  min-width: 260px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--jet);
+}
+
+.certificates .clients-item img {
+  filter: none;
+  border-radius: 14px;
+  transition: var(--transition-1);
+}
+
+.certificates .clients-item img:hover {
+  transform: scale(1.03);
+}
+
 
 
 
