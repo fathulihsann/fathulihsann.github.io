@@ -35,13 +35,13 @@
   ), hsl(240, 2%, 13%);
   --bg-gradient-yellow-1: linear-gradient(
     to bottom right, 
-    hsl(140, 100%, 55%) 0%, 
-    hsla(150, 100%, 50%, 0) 50%
+    hsl(45, 100%, 71%) 0%, 
+    hsla(36, 100%, 69%, 0) 50%
   );
   --bg-gradient-yellow-2: linear-gradient(
     135deg, 
-    hsla(140, 100%, 55%, 0.251) 0%, 
-    hsla(150, 100%, 50%, 0) 59.86%
+    hsla(45, 100%, 71%, 0.251) 0%, 
+    hsla(35, 100%, 68%, 0) 59.86%
   ), hsl(240, 2%, 13%);
   --border-gradient-onyx: linear-gradient(
     to bottom right, 
@@ -50,8 +50,8 @@
   );
   --text-gradient-yellow: linear-gradient(
     to right, 
-    hsl(140, 100%, 55%), 
-    hsl(150, 100%, 45%)
+    hsl(45, 100%, 72%), 
+    hsl(35, 100%, 68%)
   );
 
   /* solid */
@@ -63,8 +63,8 @@
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsl(140, 100%, 50%);
-  --vegas-gold: hsl(140, 70%, 45%);
+  --orange-yellow-crayola: hsl(45, 100%, 72%);
+  --vegas-gold: hsl(45, 54%, 58%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
@@ -110,60 +110,6 @@
   --transition-2: 0.5s ease-in-out;
 
 }
-
-/*-----------------------------------*\
-  #LIGHT THEME (broken white)
-\*-----------------------------------*/
-
-[data-theme="light"] {
-  --bg-gradient-onyx: linear-gradient(
-    to bottom right,
-    hsl(45, 20%, 98%) 3%,
-    hsl(40, 25%, 95%) 97%
-  );
-  --bg-gradient-jet: linear-gradient(
-    to bottom right,
-    hsla(45, 30%, 90%, 0.4) 0%,
-    hsla(40, 20%, 96%, 0) 100%
-  ), hsl(43, 33%, 97%);
-
-  --jet: hsl(40, 12%, 85%);
-  --onyx: hsl(40, 15%, 92%);
-  --eerie-black-1: hsl(45, 25%, 97%);
-  --eerie-black-2: hsl(43, 33%, 97%);
-  --smoky-black: hsl(40, 25%, 96%);
-  --white-1: hsl(0, 0%, 12%);
-  --white-2: hsl(0, 0%, 20%);
-  --light-gray: hsl(0, 0%, 30%);
-  --light-gray-70: hsla(0, 0%, 30%, 0.7);
-}
-
-[data-theme="light"] body { background: hsl(40, 25%, 96%); }
-
-[data-theme="light"] .navbar { background: hsla(40, 25%, 96%, 0.75); }
-
-/* neon glow accents (dark mode only — light mode keeps it flat/clean) */
-.navbar-link.active,
-.filter-item button.active,
-.timeline-item-title,
-.h3.service-item-title,
-.info_more-btn ion-icon {
-  text-shadow: 0 0 12px hsla(140, 100%, 50%, 0.55);
-}
-
-[data-theme="light"] .navbar-link.active,
-[data-theme="light"] .filter-item button.active,
-[data-theme="light"] .timeline-item-title,
-[data-theme="light"] .h3.service-item-title,
-[data-theme="light"] .info_more-btn ion-icon {
-  text-shadow: none;
-}
-
-.icon-box {
-  box-shadow: 0 0 0 1px hsla(140, 100%, 50%, 0.15), 0 0 18px hsla(140, 100%, 50%, 0.25);
-}
-
-[data-theme="light"] .icon-box { box-shadow: none; }
 
 
 
@@ -548,38 +494,6 @@ main {
 .navbar-link:focus { color: var(--light-gray-70); }
 
 .navbar-link.active { color: var(--orange-yellow-crayola); }
-
-.theme-btn {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 6;
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--jet);
-  border-radius: 50%;
-  color: var(--orange-yellow-crayola);
-  font-size: 20px;
-  cursor: pointer;
-  transition: var(--transition-1);
-  box-shadow: 0 0 14px hsla(140, 100%, 50%, 0.3);
-}
-
-.theme-btn:hover { transform: scale(1.08); }
-
-.theme-btn .theme-icon-light { display: none; }
-[data-theme="light"] .theme-btn .theme-icon-dark { display: none; }
-[data-theme="light"] .theme-btn .theme-icon-light { display: block; }
-
-[data-theme="light"] .theme-btn {
-  background: hsla(40, 25%, 96%, 0.85);
-  box-shadow: none;
-  color: hsl(140, 70%, 38%);
-}
 
 
 
