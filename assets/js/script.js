@@ -16,6 +16,23 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 
 
 
+// theme toggle (dark / light — broken white)
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+const applyTheme = function (theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+};
+const savedTheme = localStorage.getItem("theme") || "dark";
+applyTheme(savedTheme);
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", function () {
+    const current = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+    applyTheme(current);
+  });
+}
+
+
+
 // custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
