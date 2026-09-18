@@ -1055,6 +1055,8 @@ main {
   color: var(--light-gray-70);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
+  line-height: 1.5;
+  margin-top: 4px;
 }
 
 
