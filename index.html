@@ -11,6 +11,18 @@
 
   <link rel="stylesheet" href="./assets/css/style.css">
 
+  <!-- apply saved/system theme before first paint to avoid a flash -->
+  <script>
+    (function () {
+      var theme;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -155,6 +167,13 @@
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Kontak</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="theme-toggle" data-theme-toggle aria-label="Ganti tema terang/gelap" title="Ganti tema">
+              <ion-icon name="moon-outline" class="icon-moon"></ion-icon>
+              <ion-icon name="sunny-outline" class="icon-sun"></ion-icon>
+            </button>
           </li>
 
         </ul>

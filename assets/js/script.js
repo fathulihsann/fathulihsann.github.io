@@ -118,3 +118,16 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+
+
+// theme toggle (initial theme is set by the inline script in <head>)
+const themeToggleBtn = document.querySelector("[data-theme-toggle]");
+
+themeToggleBtn.addEventListener("click", function () {
+  const root = document.documentElement;
+  const nextTheme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+
+  root.setAttribute("data-theme", nextTheme);
+  try { localStorage.setItem("theme", nextTheme); } catch (e) {}
+});
