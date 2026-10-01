@@ -2007,14 +2007,22 @@ textarea.form-input::-webkit-resizer { display: none; }
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 4px;
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
+  height: 22px;
+  padding: 0 9px;
   color: var(--orange-yellow-crayola);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  line-height: 1;
   border: 1px solid var(--orange-yellow-crayola);
-  border-radius: 50%;
+  border-radius: 999px;
   transition: var(--transition-1);
 }
+
+.cv-icon-btn svg { width: 11px; height: 11px; }
+
+.cv-icon-btn span { display: inline; }
 
 .cv-icon-btn:hover,
 .cv-icon-btn:focus-visible {
