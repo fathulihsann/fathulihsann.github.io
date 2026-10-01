@@ -855,8 +855,6 @@ main {
   transition: var(--transition-1);
 }
 
-.cv-btn ion-icon { font-size: 16px; }
-
 .cv-btn span { display: inline; }
 
 .cv-btn:hover,
@@ -1965,5 +1963,85 @@ textarea.form-input::-webkit-resizer { display: none; }
 	 */
 
   .timeline-text { max-width: 700px; }
+
+}
+
+
+
+
+
+/*-----------------------------------*\
+  #CONTACT ACTIONS / CV BUTTON (mobile)
+\*-----------------------------------*/
+
+.contact-intro {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.contact-actions .form-btn {
+  width: 100%;
+  margin-left: 0;
+  text-transform: none;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.name-row .name { margin-bottom: 0; }
+
+.cv-icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  color: var(--orange-yellow-crayola);
+  border: 1px solid var(--orange-yellow-crayola);
+  border-radius: 50%;
+  transition: var(--transition-1);
+}
+
+.cv-icon-btn:hover,
+.cv-icon-btn:focus-visible {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+/* mobile: the CV button is icon-only beside the name, not on the Resume page */
+@media (max-width: 579px) {
+
+  .cv-btn { display: none; }
+
+}
+
+/* tablet and up: the Resume page button is used instead */
+@media (min-width: 580px) {
+
+  .cv-icon-btn { display: none; }
+
+  .name-row { margin-bottom: 15px; }
+
+  .contact-actions { grid-template-columns: 1fr 1fr; }
+
+}
+
+@media (min-width: 1250px) {
+
+  .name-row { justify-content: center; margin-bottom: 15px; }
 
 }
