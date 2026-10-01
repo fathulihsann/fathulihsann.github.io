@@ -795,11 +795,6 @@ main {
   transition: var(--transition-1);
 }
 
-/* portrait certificates (A4 upright) are shown whole inside the same frame */
-.certificates .clients-item.is-portrait { background: var(--eerie-black-1); }
-
-.certificates .clients-item.is-portrait img { object-fit: contain; }
-
 .certificates .clients-item img:hover {
   transform: scale(1.03);
 }
