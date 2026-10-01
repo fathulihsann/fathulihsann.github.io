@@ -839,6 +839,32 @@ main {
  * education and experience 
  */
 
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  margin: -12px 0 30px;
+  padding: 10px 18px;
+  color: var(--orange-yellow-crayola);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-500);
+  line-height: 1;
+  border: 1px solid var(--orange-yellow-crayola);
+  border-radius: 999px;
+  transition: var(--transition-1);
+}
+
+.cv-btn ion-icon { font-size: 16px; }
+
+.cv-btn span { display: inline; }
+
+.cv-btn:hover,
+.cv-btn:focus-visible {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
 .timeline { margin-bottom: 30px; }
 
 .timeline .title-wrapper {
