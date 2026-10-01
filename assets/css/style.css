@@ -153,6 +153,23 @@ input, textarea {
 
 :focus { outline-color: var(--orange-yellow-crayola); }
 
+/* no blue tap box / focus ring on touch; keyboard focus stays visible */
+html { -webkit-tap-highlight-color: transparent; }
+
+button, a, .navbar-link, .filter-select, .select-item button, .filter-item button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+.navbar-link, .filter-select, .select-item button, .filter-item button, .info_more-btn {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) { outline: none; }
+
 html { font-family: var(--ff-poppins); }
 
 body { background: var(--smoky-black); }
