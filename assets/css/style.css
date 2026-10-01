@@ -764,6 +764,16 @@ main {
 
 .clients-item img:hover { filter: grayscale(0); }
 
+/* horizontal carousels scroll by swipe/drag/trackpad; no visible scrollbar */
+.clients-list,
+.testimonials-list {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.clients-list::-webkit-scrollbar,
+.testimonials-list::-webkit-scrollbar { display: none; }
+
 .certificates .clients-item {
   min-width: 260px;
   width: 260px;
@@ -772,6 +782,8 @@ main {
   overflow: hidden;
   border: 1px solid var(--jet);
 }
+
+.certificates .clients-item a { height: 100%; }
 
 .certificates .clients-item img {
   width: 100%;
