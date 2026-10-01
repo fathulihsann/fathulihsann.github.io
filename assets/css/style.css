@@ -791,6 +791,14 @@ main {
 .clients-list::-webkit-scrollbar,
 .testimonials-list::-webkit-scrollbar { display: none; }
 
+/* vertical spacing matches the other sections: 20px under the heading, 30px between sections */
+.certificates { margin-bottom: 30px; }
+
+.certificates .clients-list {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .certificates .clients-item {
   min-width: 260px;
   width: 260px;
