@@ -1879,7 +1879,30 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar, article { width: auto; }
 
-  article { min-height: 100%; }
+  /* the content panel is as tall as the sidebar and scrolls inside itself */
+  article {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--jet) transparent;
+  }
+
+  article::-webkit-scrollbar { width: 6px; }
+
+  article::-webkit-scrollbar-thumb {
+    background: var(--jet);
+    border-radius: 6px;
+  }
+
+  article::-webkit-scrollbar-track { background: transparent; }
+
+  /* content scrolls under the navbar now, so give it a solid background */
+  .navbar {
+    background: var(--eerie-black-2);
+    backdrop-filter: none;
+  }
 
 
 
@@ -1897,6 +1920,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .main-content {
+    position: relative;
     min-width: 75%;
     width: 75%;
     margin: 0;
@@ -1909,10 +1933,7 @@ textarea.form-input::-webkit-resizer { display: none; }
    */
 
   .sidebar {
-    position: sticky;
-    top: 60px;
     max-height: max-content;
-    height: 100%;
     margin-bottom: 0;
     padding-top: 60px;
     z-index: 1;

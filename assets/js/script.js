@@ -88,6 +88,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
       if (i === j) {
         pages[j].classList.add("active");
         navigationLinks[j].classList.add("active");
+        pages[j].scrollTop = 0;
         window.scrollTo(0, 0);
       } else {
         pages[j].classList.remove("active");
