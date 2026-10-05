@@ -1910,12 +1910,13 @@ textarea.form-input::-webkit-resizer { display: none; }
    * MAIN
    */
 
-  /* sidebar + content fill exactly one screen; each panel scrolls inside */
+  /* sidebar + content are as tall as the sidebar's content, but never taller
+     than the screen; the content panel (and sidebar, if needed) scroll inside */
   main {
     --main-gap: clamp(16px, 5vh, 60px);
 
     max-width: 1200px;
-    height: calc(100vh - 2 * var(--main-gap));
+    max-height: calc(100vh - 2 * var(--main-gap));
     margin: var(--main-gap) auto;
     display: flex;
     justify-content: center;
@@ -1938,7 +1939,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar {
     max-height: none;
-    height: 100%;
     overflow-y: auto;
     scrollbar-width: none;
     margin-bottom: 0;
