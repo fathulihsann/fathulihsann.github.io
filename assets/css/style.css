@@ -1819,6 +1819,9 @@ textarea.form-input::-webkit-resizer { display: none; }
     gap: 20px 25px;
   }
 
+  /* an odd last card spans the full row instead of sitting alone */
+  .service-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
   /* testimonials */
 
   .testimonials-item { min-width: calc(50% - 15px); }
