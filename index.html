@@ -157,7 +157,8 @@
             <button class="navbar-link" data-nav-link>Resume</button>
           </li>
 
-          <li class="navbar-item">
+          <!-- Portfolio tab hidden for now; remove "hidden" here and on the article to show it again -->
+          <li class="navbar-item" hidden>
             <button class="navbar-link" data-nav-link>Portfolio</button>
           </li>
 
@@ -242,23 +243,6 @@
 
                 <p class="service-item-text">
                   Membangun aplikasi web dengan Laravel dan React untuk mendukung operasional dan proyek personal.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-ai.svg" alt="ai icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">AI Automation</h4>
-
-                <p class="service-item-text">
-                  Merancang AI agent untuk monitoring, ringkasan informasi otomatis, dan command center
-                  multi-asisten berbasis Telegram.
                 </p>
               </div>
 
@@ -426,7 +410,6 @@
             <li class="skill-pill">Laravel</li>
             <li class="skill-pill">React</li>
             <li class="skill-pill">Python</li>
-            <li class="skill-pill">AI Agents</li>
           </ul>
 
         </section>
@@ -436,7 +419,7 @@
 
       <!-- #PORTFOLIO -->
 
-      <article class="portfolio" data-page="portfolio">
+      <article class="portfolio" data-page="portfolio" hidden>
 
         <header>
           <h2 class="h2 article-title">Portfolio</h2>
@@ -492,25 +475,6 @@
 
           <ul class="project-list">
 
-            <li class="project-item  active" data-filter-item data-category="automation">
-              <a href="https://github.com/fathulihsann" target="_blank" rel="noopener">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-4.png" alt="AkhBot AI Command Center" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">AkhBot — AI Command Center</h3>
-
-                <p class="project-category">Command center Telegram berbasis multi-agent AI untuk monitoring server,
-                  ringkasan informasi, dan automasi operasional harian.</p>
-
-              </a>
-            </li>
-
             <li class="project-item  active" data-filter-item data-category="web">
               <a href="https://github.com/fathulihsann" target="_blank" rel="noopener">
 
@@ -526,25 +490,6 @@
 
                 <p class="project-category">Situs portofolio ini sendiri — dibangun, dikustomisasi, dan di-deploy
                   secara mandiri.</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="automation">
-              <a href="https://github.com/fathulihsann" target="_blank" rel="noopener">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-9.png" alt="Infrastructure Automation" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Infrastructure Automation</h3>
-
-                <p class="project-category">Provisioning dan monitoring server berbasis AI agent untuk mengurangi
-                  intervensi manual pada operasional rutin.</p>
 
               </a>
             </li>
